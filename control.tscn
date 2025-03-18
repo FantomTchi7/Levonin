@@ -1,9 +1,8 @@
-[gd_scene format=3 uid="uid://p0d77rhbimdc"]
+[gd_scene load_steps=2 format=3 uid="uid://p0d77rhbimdc"]
 
-[node name="Control" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[ext_resource type="PackedScene" uid="uid://ma83gokaab11" path="res://sf_for_rendering.tscn" id="1_0fbet"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="SF_forRendering" parent="." instance=ExtResource("1_0fbet")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
