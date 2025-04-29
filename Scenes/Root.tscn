@@ -183,6 +183,9 @@ clip_text = true
 layout_mode = 2
 text = "Play"
 
+[node name="Messenger" type="Control" parent="Main/VBoxContainer/PagesContainer"]
+layout_mode = 2
+
 [node name="NavbarContainer" type="PanelContainer" parent="Main/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
