@@ -1,22 +1,39 @@
-[gd_scene load_steps=6 format=3 uid="uid://dpcowrx2l3y5n"]
+[gd_scene load_steps=7 format=3 uid="uid://dpcowrx2l3y5n"]
 
-[ext_resource type="Texture2D" uid="uid://c8lh42dcwh28r" path="res://Resources/Icons/IconAndroidMain.png" id="1_kqog5"]
-[ext_resource type="PackedScene" uid="uid://crtfyox80fojh" path="res://Resources/Models/Maxwell/Maxwell.fbx" id="2_knkkn"]
-[ext_resource type="Script" uid="uid://8pm040ivs20p" path="res://Resources/Scripts/Maxwell.cs" id="3_knkkn"]
+[ext_resource type="Script" uid="uid://717uxynbrke2" path="res://Resources/Scripts/GUI/Controller.cs" id="1_pl8e4"]
+[ext_resource type="PackedScene" uid="uid://ccgmefe7usou7" path="res://Scenes/Profile.tscn" id="2_kqog5"]
+[ext_resource type="PackedScene" uid="uid://c7heox6rjhypa" path="res://Scenes/Login.tscn" id="3_knkkn"]
+[ext_resource type="PackedScene" uid="uid://b2g01j784esvw" path="res://Scenes/Games.tscn" id="4_oss8w"]
+[ext_resource type="PackedScene" uid="uid://cwh4iq0mfhmru" path="res://Scenes/SignUp.tscn" id="4_sxhdm"]
+[ext_resource type="PackedScene" uid="uid://d2171r7qdqxo3" path="res://Scenes/Messenger.tscn" id="5_oss8w"]
 
-[sub_resource type="Environment" id="Environment_knkkn"]
-ambient_light_source = 2
-ambient_light_color = Color(1, 1, 1, 1)
-reflected_light_source = 1
-adjustment_brightness = 1.87
-
-[sub_resource type="World3D" id="World3D_sxhdm"]
-environment = SubResource("Environment_knkkn")
-
-[node name="Root" type="Node"]
+[node name="Root" type="Control" node_paths=PackedStringArray("MainPageButton", "MainPageContainer", "MessengerPageButton", "MessengerPageContainer", "ProfilePageButton", "ProfilePageContainer", "gg", "gg2")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pl8e4")
+MainPageButton = NodePath("Main/VBoxContainer/NavbarContainer/HBoxContainer/Button")
+MainPageContainer = NodePath("Main/VBoxContainer/PagesContainer/Games")
+MessengerPageButton = NodePath("Main/VBoxContainer/NavbarContainer/HBoxContainer/Button2")
+MessengerPageContainer = NodePath("Main/VBoxContainer/PagesContainer/Messenger")
+ProfilePageButton = NodePath("Main/VBoxContainer/NavbarContainer/HBoxContainer/Button3")
+ProfilePageContainer = NodePath("Main/VBoxContainer/PagesContainer/Profile")
+gg = {
+0: NodePath("Main/VBoxContainer/PagesContainer/Games"),
+1: NodePath("Main/VBoxContainer/PagesContainer/Messenger"),
+2: NodePath("Main/VBoxContainer/PagesContainer/Profile")
+}
+gg2 = {
+0: NodePath("Main/VBoxContainer/NavbarContainer/HBoxContainer/Button"),
+1: NodePath("Main/VBoxContainer/NavbarContainer/HBoxContainer/Button2"),
+2: NodePath("Main/VBoxContainer/NavbarContainer/HBoxContainer/Button3")
+}
 
 [node name="Main" type="Control" parent="."]
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -37,157 +54,24 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 7.5
 
-[node name="ProfileContainer" type="MarginContainer" parent="Main/VBoxContainer/PagesContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 25
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Main/VBoxContainer/PagesContainer/ProfileContainer"]
-layout_mode = 2
-
-[node name="UserAvatar" type="TextureRect" parent="Main/VBoxContainer/PagesContainer/ProfileContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-texture = ExtResource("1_kqog5")
-
-[node name="Label" type="Label" parent="Main/VBoxContainer/PagesContainer/ProfileContainer/VBoxContainer"]
-layout_mode = 2
-text = "Name"
-horizontal_alignment = 1
-
-[node name="MaxwellSpin" type="SubViewportContainer" parent="Main/VBoxContainer/PagesContainer/ProfileContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="Main/VBoxContainer/PagesContainer/ProfileContainer/VBoxContainer/MaxwellSpin"]
-world_3d = SubResource("World3D_sxhdm")
-transparent_bg = true
-handle_input_locally = false
-msaa_3d = 3
-screen_space_aa = 1
-size = Vector2i(343, 479)
-size_2d_override = Vector2i(128, 128)
-size_2d_override_stretch = true
-render_target_update_mode = 4
-
-[node name="Maxwell" parent="Main/VBoxContainer/PagesContainer/ProfileContainer/VBoxContainer/MaxwellSpin/SubViewport" instance=ExtResource("2_knkkn")]
-script = ExtResource("3_knkkn")
-
-[node name="Camera3D" type="Camera3D" parent="Main/VBoxContainer/PagesContainer/ProfileContainer/VBoxContainer/MaxwellSpin/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 0.996195, 0.0871557, 0, -0.0871557, 0.996195, 0, 3, 5)
-current = true
-
-[node name="LoginContainer" type="MarginContainer" parent="Main/VBoxContainer/PagesContainer"]
-visible = false
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 25
-
-[node name="VBoxContainer3" type="VBoxContainer" parent="Main/VBoxContainer/PagesContainer/LoginContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Main/VBoxContainer/PagesContainer/LoginContainer/VBoxContainer3"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Main/VBoxContainer/PagesContainer/LoginContainer/VBoxContainer3/VBoxContainer"]
-layout_mode = 2
-text = "Name"
-
-[node name="LineEdit" type="LineEdit" parent="Main/VBoxContainer/PagesContainer/LoginContainer/VBoxContainer3/VBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Main/VBoxContainer/PagesContainer/LoginContainer/VBoxContainer3"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Main/VBoxContainer/PagesContainer/LoginContainer/VBoxContainer3/VBoxContainer2"]
-layout_mode = 2
-text = "Password"
-
-[node name="LineEdit" type="LineEdit" parent="Main/VBoxContainer/PagesContainer/LoginContainer/VBoxContainer3/VBoxContainer2"]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="Main/VBoxContainer/PagesContainer/LoginContainer/VBoxContainer3"]
-layout_mode = 2
-text = "Login"
-
-[node name="SignUpContainer" type="MarginContainer" parent="Main/VBoxContainer/PagesContainer"]
-visible = false
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 25
-
-[node name="VBoxContainer3" type="VBoxContainer" parent="Main/VBoxContainer/PagesContainer/SignUpContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Main/VBoxContainer/PagesContainer/SignUpContainer/VBoxContainer3"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Main/VBoxContainer/PagesContainer/SignUpContainer/VBoxContainer3/VBoxContainer"]
-layout_mode = 2
-text = "Name"
-
-[node name="LineEdit" type="LineEdit" parent="Main/VBoxContainer/PagesContainer/SignUpContainer/VBoxContainer3/VBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Main/VBoxContainer/PagesContainer/SignUpContainer/VBoxContainer3"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Main/VBoxContainer/PagesContainer/SignUpContainer/VBoxContainer3/VBoxContainer2"]
-layout_mode = 2
-text = "Password"
-
-[node name="LineEdit" type="LineEdit" parent="Main/VBoxContainer/PagesContainer/SignUpContainer/VBoxContainer3/VBoxContainer2"]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="Main/VBoxContainer/PagesContainer/SignUpContainer/VBoxContainer3"]
-layout_mode = 2
-text = "Sign Up"
-
-[node name="GamesContainer" type="MarginContainer" parent="Main/VBoxContainer/PagesContainer"]
+[node name="Profile" parent="Main/VBoxContainer/PagesContainer" instance=ExtResource("2_kqog5")]
 visible = false
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Main/VBoxContainer/PagesContainer/GamesContainer"]
+[node name="Login" parent="Main/VBoxContainer/PagesContainer" instance=ExtResource("3_knkkn")]
+visible = false
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Main/VBoxContainer/PagesContainer/GamesContainer/VBoxContainer"]
+[node name="SignUp" parent="Main/VBoxContainer/PagesContainer" instance=ExtResource("4_sxhdm")]
+visible = false
 layout_mode = 2
 
-[node name="GameImage" type="TextureRect" parent="Main/VBoxContainer/PagesContainer/GamesContainer/VBoxContainer/HBoxContainer"]
+[node name="Games" parent="Main/VBoxContainer/PagesContainer" instance=ExtResource("4_oss8w")]
+visible = false
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-texture = ExtResource("1_kqog5")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Main/VBoxContainer/PagesContainer/GamesContainer/VBoxContainer/HBoxContainer"]
+[node name="Messenger" parent="Main/VBoxContainer/PagesContainer" instance=ExtResource("5_oss8w")]
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="NameLabel" type="Label" parent="Main/VBoxContainer/PagesContainer/GamesContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "Game name"
-
-[node name="DescriptionLabel" type="Label" parent="Main/VBoxContainer/PagesContainer/GamesContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 130)
-layout_mode = 2
-theme_override_font_sizes/font_size = 9
-text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-autowrap_mode = 3
-clip_text = true
-
-[node name="Button" type="Button" parent="Main/VBoxContainer/PagesContainer/GamesContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "Play"
 
 [node name="NavbarContainer" type="PanelContainer" parent="Main/VBoxContainer"]
 layout_mode = 2

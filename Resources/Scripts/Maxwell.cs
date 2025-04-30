@@ -10,7 +10,5 @@ public partial class Maxwell : Node3D
 		float radiansToRotate = -RotationSpeedRadians * (float)delta;
 
 		RotateY(radiansToRotate);
-
-		GD.Print(Rotation.Y);
 	}
 }

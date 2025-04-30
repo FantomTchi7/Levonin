@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="UserDataResource" load_steps=2 format=3 uid="uid://c36pmuvlfxlfy"]
+
+[ext_resource type="Script" uid="uid://dbjimg7lfd6ql" path="res://Resources/Scripts/Data/UserDataResource.cs" id="1_a677w"]
+
+[resource]
+script = ExtResource("1_a677w")
+UserName = ""
+Token = ""
+IsRegistered = false
+metadata/_custom_type_script = "uid://dbjimg7lfd6ql"
