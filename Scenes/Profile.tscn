@@ -4,14 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://crtfyox80fojh" path="res://Resources/Models/Maxwell/Maxwell.fbx" id="2_hjayj"]
 [ext_resource type="Script" uid="uid://8pm040ivs20p" path="res://Resources/Scripts/Maxwell.cs" id="3_h7yon"]
 
-[sub_resource type="Environment" id="Environment_knkkn"]
+[sub_resource type="Environment" id="Environment_irxi3"]
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
-reflected_light_source = 1
-adjustment_brightness = 1.87
 
-[sub_resource type="World3D" id="World3D_ux626"]
-environment = SubResource("Environment_knkkn")
+[sub_resource type="World3D" id="World3D_hjayj"]
+environment = SubResource("Environment_irxi3")
 
 [node name="Profile" type="PanelContainer"]
 anchors_preset = 15
@@ -40,7 +38,7 @@ size_flags_vertical = 3
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="VBoxContainer/MaxwellSpin"]
-world_3d = SubResource("World3D_ux626")
+world_3d = SubResource("World3D_hjayj")
 transparent_bg = true
 handle_input_locally = false
 msaa_3d = 3

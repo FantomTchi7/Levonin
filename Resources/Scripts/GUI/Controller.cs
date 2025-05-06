@@ -46,9 +46,10 @@ public partial class Controller : Control
 			}
 		}
 	}
-
 	public override void _Ready()
 	{
+
+
 		CheckExportedFields(this, new ExportedFieldsAction[] { CheckExportedField, InitializeButtonEvent });
 		PageDefinitions = new List<PageDefinition>()
 		{
@@ -57,7 +58,6 @@ public partial class Controller : Control
 			new PageDefinition(Page.Profile, ProfilePageContainer, ProfilePageButton)
 		};
 	}
-
 	private void ChangePage(Page page)
 	{
 		Func<Page, PageDefinition> pageDefinition = (containerPage) => PageDefinitions.Find(pageDefinition => pageDefinition.Page == containerPage);
@@ -98,7 +98,6 @@ public partial class Controller : Control
 			}
 		}
 	}
-
 	private void Button_Pressed(Button button)
 	{
 		PageDefinition pageDefinition = PageDefinitions.Find(pageDefinition => pageDefinition.Button == button);

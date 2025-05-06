@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cwh4iq0mfhmru" path="res://Scenes/SignUp.tscn" id="4_sxhdm"]
 [ext_resource type="PackedScene" uid="uid://d2171r7qdqxo3" path="res://Scenes/Messenger.tscn" id="5_oss8w"]
 
-[node name="Root" type="Control" node_paths=PackedStringArray("MainPageButton", "MainPageContainer", "MessengerPageButton", "MessengerPageContainer", "ProfilePageButton", "ProfilePageContainer", "gg", "gg2")]
+[node name="Root" type="Control" node_paths=PackedStringArray("MainPageButton", "MainPageContainer", "MessengerPageButton", "MessengerPageContainer", "ProfilePageButton", "ProfilePageContainer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,11 +25,6 @@ gg = {
 0: NodePath("Main/VBoxContainer/PagesContainer/Games"),
 1: NodePath("Main/VBoxContainer/PagesContainer/Messenger"),
 2: NodePath("Main/VBoxContainer/PagesContainer/Profile")
-}
-gg2 = {
-0: NodePath("Main/VBoxContainer/NavbarContainer/HBoxContainer/Button"),
-1: NodePath("Main/VBoxContainer/NavbarContainer/HBoxContainer/Button2"),
-2: NodePath("Main/VBoxContainer/NavbarContainer/HBoxContainer/Button3")
 }
 
 [node name="Main" type="Control" parent="."]
@@ -71,6 +66,7 @@ visible = false
 layout_mode = 2
 
 [node name="Messenger" parent="Main/VBoxContainer/PagesContainer" instance=ExtResource("5_oss8w")]
+visible = false
 layout_mode = 2
 
 [node name="NavbarContainer" type="PanelContainer" parent="Main/VBoxContainer"]
