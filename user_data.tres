@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="UserDataResource" load_steps=2 format=3]
-
-[ext_resource type="Script" path="res://Resources/Scripts/Data/UserDataResource.cs" id="1_p2mqg"]
-
-[resource]
-script = ExtResource("1_p2mqg")
-UserName = ""
-Token = ""
-IsRegistered = false

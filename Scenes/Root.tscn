@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://dpcowrx2l3y5n"]
+[gd_scene load_steps=10 format=3 uid="uid://dpcowrx2l3y5n"]
 
-[ext_resource type="Script" uid="uid://717uxynbrke2" path="res://Resources/Scripts/GUI/Controller.cs" id="1_pl8e4"]
-[ext_resource type="PackedScene" uid="uid://ccgmefe7usou7" path="res://Scenes/Profile.tscn" id="2_kqog5"]
-[ext_resource type="PackedScene" uid="uid://c7heox6rjhypa" path="res://Scenes/Login.tscn" id="3_knkkn"]
-[ext_resource type="PackedScene" uid="uid://b2g01j784esvw" path="res://Scenes/Games.tscn" id="4_oss8w"]
-[ext_resource type="PackedScene" uid="uid://cwh4iq0mfhmru" path="res://Scenes/SignUp.tscn" id="4_sxhdm"]
-[ext_resource type="PackedScene" uid="uid://d2171r7qdqxo3" path="res://Scenes/Messenger.tscn" id="5_oss8w"]
+[ext_resource type="Script" uid="uid://717uxynbrke2" path="res://Scripts/GUI/Controller.cs" id="1_pl8e4"]
+[ext_resource type="Theme" uid="uid://crwx1fjw63c6d" path="res://Themes/Default.tres" id="1_tkdr5"]
+[ext_resource type="PackedScene" uid="uid://ck6stw068javs" path="res://Scenes/Pages/Chat/Chat.tscn" id="2_is6ib"]
+[ext_resource type="PackedScene" uid="uid://ccgmefe7usou7" path="res://Scenes/Pages/Profile.tscn" id="2_kqog5"]
+[ext_resource type="PackedScene" uid="uid://c7heox6rjhypa" path="res://Scenes/Pages/Login.tscn" id="3_knkkn"]
+[ext_resource type="PackedScene" uid="uid://b2g01j784esvw" path="res://Scenes/Pages/Games.tscn" id="4_oss8w"]
+[ext_resource type="PackedScene" uid="uid://cwh4iq0mfhmru" path="res://Scenes/Pages/SignUp.tscn" id="4_sxhdm"]
+[ext_resource type="PackedScene" uid="uid://d2171r7qdqxo3" path="res://Scenes/Pages/Messenger.tscn" id="5_oss8w"]
+[ext_resource type="FontFile" uid="uid://dx407ykec15ux" path="res://Fonts/MaterialSymbolsRounded/MaterialSymbolsRounded-VariableFont_FILL,GRAD,opsz,wght.ttf" id="9_0tf6y"]
 
 [node name="Root" type="Control" node_paths=PackedStringArray("MainPageButton", "MainPageContainer", "MessengerPageButton", "MessengerPageContainer", "ProfilePageButton", "ProfilePageContainer")]
 layout_mode = 3
@@ -14,12 +17,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_tkdr5")
 script = ExtResource("1_pl8e4")
-MainPageButton = NodePath("Main/VBoxContainer/NavbarContainer/HBoxContainer/Button")
+MainPageButton = NodePath("Main/VBoxContainer/NavbarContainer/HBoxContainer/ButtonHome")
 MainPageContainer = NodePath("Main/VBoxContainer/PagesContainer/Games")
-MessengerPageButton = NodePath("Main/VBoxContainer/NavbarContainer/HBoxContainer/Button2")
+MessengerPageButton = NodePath("Main/VBoxContainer/NavbarContainer/HBoxContainer/ButtonChat")
 MessengerPageContainer = NodePath("Main/VBoxContainer/PagesContainer/Messenger")
-ProfilePageButton = NodePath("Main/VBoxContainer/NavbarContainer/HBoxContainer/Button3")
+ProfilePageButton = NodePath("Main/VBoxContainer/NavbarContainer/HBoxContainer/ButtonProfile")
 ProfilePageContainer = NodePath("Main/VBoxContainer/PagesContainer/Profile")
 gg = {
 0: NodePath("Main/VBoxContainer/PagesContainer/Games"),
@@ -49,6 +53,10 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 7.5
 
+[node name="PmChat" parent="Main/VBoxContainer/PagesContainer" instance=ExtResource("2_is6ib")]
+visible = false
+layout_mode = 2
+
 [node name="Profile" parent="Main/VBoxContainer/PagesContainer" instance=ExtResource("2_kqog5")]
 visible = false
 layout_mode = 2
@@ -76,14 +84,23 @@ size_flags_vertical = 3
 [node name="HBoxContainer" type="HBoxContainer" parent="Main/VBoxContainer/NavbarContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="Main/VBoxContainer/NavbarContainer/HBoxContainer"]
+[node name="ButtonHome" type="Button" parent="Main/VBoxContainer/NavbarContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("9_0tf6y")
+theme_override_font_sizes/font_size = 28
+text = "Home"
 
-[node name="Button2" type="Button" parent="Main/VBoxContainer/NavbarContainer/HBoxContainer"]
+[node name="ButtonChat" type="Button" parent="Main/VBoxContainer/NavbarContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("9_0tf6y")
+theme_override_font_sizes/font_size = 28
+text = "Chat"
 
-[node name="Button3" type="Button" parent="Main/VBoxContainer/NavbarContainer/HBoxContainer"]
+[node name="ButtonProfile" type="Button" parent="Main/VBoxContainer/NavbarContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("9_0tf6y")
+theme_override_font_sizes/font_size = 28
+text = "Person"
