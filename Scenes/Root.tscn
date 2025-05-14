@@ -19,26 +19,17 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_tkdr5")
 script = ExtResource("1_pl8e4")
-MainPageButton = NodePath("Main/VBoxContainer/NavbarContainer/HBoxContainer/ButtonHome")
-MainPageContainer = NodePath("Main/VBoxContainer/PagesContainer/Games")
-MessengerPageButton = NodePath("Main/VBoxContainer/NavbarContainer/HBoxContainer/ButtonChat")
-MessengerPageContainer = NodePath("Main/VBoxContainer/PagesContainer/Messenger")
-ProfilePageButton = NodePath("Main/VBoxContainer/NavbarContainer/HBoxContainer/ButtonProfile")
-ProfilePageContainer = NodePath("Main/VBoxContainer/PagesContainer/Profile")
+MainPageButton = NodePath("MainContainer/NavbarContainer/ButtonsContainer/ButtonHome")
+MainPageContainer = NodePath("MainContainer/PagesContainer/Games")
+MessengerPageButton = NodePath("MainContainer/NavbarContainer/ButtonsContainer/ButtonChat")
+MessengerPageContainer = NodePath("MainContainer/PagesContainer/Messenger")
+ProfilePageButton = NodePath("MainContainer/NavbarContainer/ButtonsContainer/ButtonProfile")
+ProfilePageContainer = NodePath("MainContainer/PagesContainer/Profile")
 gg = {
-0: NodePath("Main/VBoxContainer/PagesContainer/Games"),
-1: NodePath("Main/VBoxContainer/PagesContainer/Messenger"),
-2: NodePath("Main/VBoxContainer/PagesContainer/Profile")
+0: NodePath("MainContainer/PagesContainer/Games"),
+1: NodePath("MainContainer/PagesContainer/Messenger"),
+2: NodePath("MainContainer/PagesContainer/Profile")
 }
-
-[node name="Main" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("6_is6ib")
 
 [node name="MainContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -47,58 +38,59 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
 [node name="PagesContainer" type="PanelContainer" parent="MainContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 7.5
 
-[node name="PmChat" parent="Main/VBoxContainer/PagesContainer" instance=ExtResource("2_is6ib")]
+[node name="PmChat" parent="MainContainer/PagesContainer" instance=ExtResource("2_is6ib")]
 visible = false
 layout_mode = 2
 
-[node name="Profile" parent="Main/VBoxContainer/PagesContainer" instance=ExtResource("2_kqog5")]
+[node name="Profile" parent="MainContainer/PagesContainer" instance=ExtResource("2_kqog5")]
 visible = false
 layout_mode = 2
 
-[node name="Login" parent="Main/VBoxContainer/PagesContainer" instance=ExtResource("3_knkkn")]
+[node name="Login" parent="MainContainer/PagesContainer" instance=ExtResource("3_knkkn")]
 visible = false
 layout_mode = 2
 
-[node name="SignUp" parent="Main/VBoxContainer/PagesContainer" instance=ExtResource("4_sxhdm")]
+[node name="SignUp" parent="MainContainer/PagesContainer" instance=ExtResource("4_sxhdm")]
 visible = false
 layout_mode = 2
 
-[node name="Games" parent="Main/VBoxContainer/PagesContainer" instance=ExtResource("4_oss8w")]
+[node name="Games" parent="MainContainer/PagesContainer" instance=ExtResource("4_oss8w")]
 visible = false
 layout_mode = 2
 
-[node name="Messenger" parent="Main/VBoxContainer/PagesContainer" instance=ExtResource("5_oss8w")]
+[node name="Messenger" parent="MainContainer/PagesContainer" instance=ExtResource("5_oss8w")]
 visible = false
 layout_mode = 2
 
-[node name="NavbarContainer" type="PanelContainer" parent="Main/VBoxContainer"]
+[node name="NavbarContainer" type="PanelContainer" parent="MainContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="ButtonsContainer" type="HBoxContainer" parent="MainContainer/NavbarContainer"]
 layout_mode = 2
 
-[node name="ButtonHome" type="Button" parent="Main/VBoxContainer/NavbarContainer/HBoxContainer"]
+[node name="ButtonHome" type="Button" parent="MainContainer/NavbarContainer/ButtonsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("9_0tf6y")
 theme_override_font_sizes/font_size = 28
 text = "Home"
 
-[node name="ButtonChat" type="Button" parent="Main/VBoxContainer/NavbarContainer/HBoxContainer"]
+[node name="ButtonChat" type="Button" parent="MainContainer/NavbarContainer/ButtonsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("9_0tf6y")
 theme_override_font_sizes/font_size = 28
 text = "Chat"
 
-[node name="ButtonProfile" type="Button" parent="Main/VBoxContainer/NavbarContainer/HBoxContainer"]
+[node name="ButtonProfile" type="Button" parent="MainContainer/NavbarContainer/ButtonsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("9_0tf6y")
