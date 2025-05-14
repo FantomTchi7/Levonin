@@ -19,6 +19,10 @@ config/icon="uid://n8d5oltwevuf"
 config/macos_native_icon="res://Icons/App/IconMacOS.icns"
 config/windows_native_icon="res://Icons/App/IconWindows.ico"
 
+[autoload]
+
+GameManager="*res://Scripts/GameManager.cs"
+
 [display]
 
 window/size/viewport_width=393
