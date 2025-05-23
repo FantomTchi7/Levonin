@@ -1,8 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://ccgmefe7usou7"]
+[gd_scene load_steps=10 format=3 uid="uid://ccgmefe7usou7"]
 
 [ext_resource type="Texture2D" uid="uid://c8lh42dcwh28r" path="res://Icons/App/IconAndroidMain.png" id="1_irxi3"]
+[ext_resource type="Theme" uid="uid://crwx1fjw63c6d" path="res://Themes/Default.tres" id="1_tr77g"]
+[ext_resource type="StyleBox" uid="uid://cjr0fk26dffmg" path="res://Styles/stylebox_ProfileRoundAvatar.tres" id="2_71e8n"]
+[ext_resource type="FontFile" uid="uid://dx407ykec15ux" path="res://Fonts/MaterialSymbolsRounded/MaterialSymbolsRounded-VariableFont_FILL,GRAD,opsz,wght.ttf" id="2_ey25m"]
 [ext_resource type="PackedScene" uid="uid://crtfyox80fojh" path="res://Models/Maxwell/Maxwell.fbx" id="2_hjayj"]
 [ext_resource type="Script" uid="uid://8pm040ivs20p" path="res://Scripts/Maxwell.cs" id="3_h7yon"]
+[ext_resource type="StyleBox" uid="uid://b655bp1fvoybf" path="res://Styles/stylebox_ProfileAvatarBorder.tres" id="5_36pgd"]
 
 [sub_resource type="Environment" id="Environment_irxi3"]
 ambient_light_source = 2
@@ -17,20 +21,85 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_tr77g")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
+theme_override_constants/separation = 20
 
-[node name="UserAvatar" type="TextureRect" parent="VBoxContainer"]
+[node name="ProfileContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.75
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 75
+theme_override_constants/margin_right = 75
+theme_override_constants/margin_bottom = 75
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ProfileContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="AvatarContainer" type="AspectRatioContainer" parent="VBoxContainer/ProfileContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RoundAvatar" type="Panel" parent="VBoxContainer/ProfileContainer/VBoxContainer/AvatarContainer"]
+clip_children = 1
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_71e8n")
+
+[node name="DefaultAvatar" type="Label" parent="VBoxContainer/ProfileContainer/VBoxContainer/AvatarContainer/RoundAvatar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_ey25m")
+theme_override_font_sizes/font_size = 148
+text = "Person"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UserAvatar" type="TextureRect" parent="VBoxContainer/ProfileContainer/VBoxContainer/AvatarContainer/RoundAvatar"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 texture = ExtResource("1_irxi3")
+expand_mode = 3
+stretch_mode = 5
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Border" type="Panel" parent="VBoxContainer/ProfileContainer/VBoxContainer/AvatarContainer/RoundAvatar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("5_36pgd")
+
+[node name="NameLabel" type="Label" parent="VBoxContainer/ProfileContainer/VBoxContainer"]
 layout_mode = 2
-text = "Name"
+theme_override_font_sizes/font_size = 24
+text = "Not logged in"
 horizontal_alignment = 1
+
+[node name="LoginButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Login"
+
+[node name="SignInButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Sign in"
 
 [node name="MaxwellSpin" type="SubViewportContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -43,7 +112,7 @@ transparent_bg = true
 handle_input_locally = false
 msaa_3d = 3
 screen_space_aa = 1
-size = Vector2i(393, 630)
+size = Vector2i(393, 252)
 size_2d_override = Vector2i(128, 128)
 size_2d_override_stretch = true
 render_target_update_mode = 4

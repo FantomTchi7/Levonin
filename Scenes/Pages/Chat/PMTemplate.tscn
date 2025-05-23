@@ -1,88 +1,118 @@
-[gd_scene load_steps=8 format=3 uid="uid://bj0r3b7we8c7x"]
+[gd_scene load_steps=6 format=3 uid="uid://bj0r3b7we8c7x"]
 
-[ext_resource type="StyleBox" uid="uid://cd8r52rcm24d8" path="res://Styles/stylebox_PMTemplate_offline.tres" id="1_33kcn"]
+[ext_resource type="StyleBox" uid="uid://dhohtxacmfltt" path="res://Styles/stylebox_ChatRoundAvatar.tres" id="1_33r3m"]
+[ext_resource type="FontFile" uid="uid://dx407ykec15ux" path="res://Fonts/MaterialSymbolsRounded/MaterialSymbolsRounded-VariableFont_FILL,GRAD,opsz,wght.ttf" id="2_vsqd6"]
+[ext_resource type="Texture2D" uid="uid://c8lh42dcwh28r" path="res://Icons/App/IconAndroidMain.png" id="3_gtr3x"]
+[ext_resource type="StyleBox" uid="uid://c7syyrens7e16" path="res://Styles/stylebox_ChatAvatarBorder.tres" id="4_6ibq6"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_avyif"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_emwj6"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 100
-corner_radius_top_right = 100
-corner_radius_bottom_right = 100
-corner_radius_bottom_left = 100
-
-[sub_resource type="Shader" id="Shader_1qh6n"]
-code = "shader_type canvas_item;
-
-void vertex() {
-	// Called for every vertex the material is visible on.
-}
-
-void fragment() {
-	// Called for every pixel the material is visible on.
-}
-
-//void light() {
-//	// Called for every pixel for every light affecting the CanvasItem.
-//	// Uncomment to replace the default light processing function with this one.
-//}
-"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hjo78"]
-shader = SubResource("Shader_1qh6n")
-
-[sub_resource type="Theme" id="Theme_hp3nm"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_565d8"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_33r3m"]
+bg_color = Color(0.631373, 0.631373, 0.631373, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 100
 corner_radius_top_right = 100
 corner_radius_bottom_right = 100
 corner_radius_bottom_left = 100
 corner_detail = 20
 
-[node name="PmTemplate" type="PanelContainer"]
+[node name="PmTemplate" type="VBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_avyif")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
+size_flags_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
-[node name="UserImagePanel" type="PanelContainer" parent="HBoxContainer"]
-modulate = Color(0.986752, 0.986752, 0.986752, 1)
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UserImagePanel" type="PanelContainer" parent="MarginContainer/HBoxContainer/AspectRatioContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_emwj6")
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("1_33r3m")
 
-[node name="ImagePanel" type="Panel" parent="HBoxContainer/UserImagePanel"]
-material = SubResource("ShaderMaterial_hjo78")
+[node name="RoundAvatar" type="Panel" parent="MarginContainer/HBoxContainer/AspectRatioContainer/UserImagePanel"]
+clip_children = 1
 layout_mode = 2
-theme = SubResource("Theme_hp3nm")
-theme_override_styles/panel = SubResource("StyleBoxFlat_565d8")
+theme_override_styles/panel = ExtResource("1_33r3m")
 
-[node name="StatusPanel" type="Panel" parent="HBoxContainer/UserImagePanel"]
+[node name="DefaultAvatar" type="Label" parent="MarginContainer/HBoxContainer/AspectRatioContainer/UserImagePanel/RoundAvatar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_vsqd6")
+theme_override_font_sizes/font_size = 64
+text = "Person"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UserAvatar" type="TextureRect" parent="MarginContainer/HBoxContainer/AspectRatioContainer/UserImagePanel/RoundAvatar"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("3_gtr3x")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Border" type="Panel" parent="MarginContainer/HBoxContainer/AspectRatioContainer/UserImagePanel/RoundAvatar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("4_6ibq6")
+
+[node name="StatusPanel" type="Panel" parent="MarginContainer/HBoxContainer/AspectRatioContainer/UserImagePanel"]
 use_parent_material = true
 custom_minimum_size = Vector2(30, 30)
 layout_direction = 1
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_styles/panel = ExtResource("1_33kcn")
+theme_override_styles/panel = SubResource("StyleBoxFlat_33r3m")
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+[node name="InfoContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
-[node name="Name" type="Label" parent="HBoxContainer/MarginContainer"]
-custom_minimum_size = Vector2(0, 101)
+[node name="Name" type="Label" parent="MarginContainer/HBoxContainer/InfoContainer"]
 layout_mode = 2
-text = "DAUN JA"
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 24
+text = "Name"
 
-[node name="Status" type="Label" parent="HBoxContainer/MarginContainer"]
+[node name="Status" type="Label" parent="MarginContainer/HBoxContainer/InfoContainer"]
 layout_mode = 2
-text = "ONLINE"
+size_flags_vertical = 1
+text = "Status"
+vertical_alignment = 2

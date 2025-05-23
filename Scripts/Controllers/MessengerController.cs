@@ -42,12 +42,14 @@ public partial class MessengerController : PanelContainer
 			{
 				Node componentInstance = PMTemplate.Instantiate();
 
-				HBoxContainer hboxContainer = componentInstance.GetNode<HBoxContainer>("HBoxContainer");
-				MarginContainer marginContainer = hboxContainer.GetNode<MarginContainer>("MarginContainer");
-				marginContainer.GetNode<Label>("Name").Text = template.Name;
-				marginContainer.GetNode<Label>("Status").Text = template.Status.ToString();
+				MarginContainer marginContainer = componentInstance.GetNode<MarginContainer>("MarginContainer");
+				HBoxContainer hboxContainer = marginContainer.GetNode<HBoxContainer>("HBoxContainer");
+				AspectRatioContainer aspectRatioContainer = hboxContainer.GetNode<AspectRatioContainer>("AspectRatioContainer");
+				MarginContainer infoContainer = hboxContainer.GetNode<MarginContainer>("InfoContainer");
+				infoContainer.GetNode<Label>("Name").Text = template.Name;
+				infoContainer.GetNode<Label>("Status").Text = template.Status.ToString();
 
-				PanelContainer panelContainer = hboxContainer.GetNode<PanelContainer>("UserImagePanel");
+				PanelContainer panelContainer = aspectRatioContainer.GetNode<PanelContainer>("UserImagePanel");
 				Panel statusPanel = panelContainer.GetNode<Panel>("StatusPanel");
 				StyleBoxFlat styleBoxFlat = (StyleBoxFlat)statusPanel.GetThemeStylebox("panel");
 				if (styleBoxFlat != null)
