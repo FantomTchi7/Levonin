@@ -87,7 +87,7 @@ public partial class Controller : Control
 			object value = propertyInfo.GetValue(targetObject);
 			if (value == null)
 			{
-				GD.Print("gg, wp");
+				GetTree().Quit();
 			}
 		}
 	}
