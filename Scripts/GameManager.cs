@@ -15,7 +15,7 @@ public partial class GameManager : Node
 			{
 				
 				UserData = new UserDataResource();
-				UserData.IsRegistered = false;
+				UserData.IsRegistered = true;
 				UserData.Token = null;
 				UserData.UserName = null;
 

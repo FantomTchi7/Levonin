@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://ccgmefe7usou7"]
+[gd_scene load_steps=11 format=3 uid="uid://ccgmefe7usou7"]
 
 [ext_resource type="Texture2D" uid="uid://c8lh42dcwh28r" path="res://Icons/App/IconAndroidMain.png" id="1_irxi3"]
 [ext_resource type="Theme" uid="uid://crwx1fjw63c6d" path="res://Themes/Default.tres" id="1_tr77g"]
+[ext_resource type="Script" uid="uid://bll44y8axjd68" path="res://Scenes/Pages/Profile.cs" id="2_36pgd"]
 [ext_resource type="StyleBox" uid="uid://cjr0fk26dffmg" path="res://Styles/stylebox_ProfileRoundAvatar.tres" id="2_71e8n"]
 [ext_resource type="FontFile" uid="uid://dx407ykec15ux" path="res://Fonts/MaterialSymbolsRounded/MaterialSymbolsRounded-VariableFont_FILL,GRAD,opsz,wght.ttf" id="2_ey25m"]
 [ext_resource type="PackedScene" uid="uid://crtfyox80fojh" path="res://Models/Maxwell/Maxwell.fbx" id="2_hjayj"]
@@ -22,6 +23,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_tr77g")
+script = ExtResource("2_36pgd")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2

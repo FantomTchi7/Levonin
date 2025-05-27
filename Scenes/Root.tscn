@@ -50,10 +50,10 @@ visible = false
 layout_mode = 2
 
 [node name="Profile" parent="MainContainer/PagesContainer" instance=ExtResource("2_kqog5")]
+visible = false
 layout_mode = 2
 
 [node name="Login" parent="MainContainer/PagesContainer" instance=ExtResource("3_knkkn")]
-visible = false
 layout_mode = 2
 
 [node name="SignUp" parent="MainContainer/PagesContainer" instance=ExtResource("4_sxhdm")]

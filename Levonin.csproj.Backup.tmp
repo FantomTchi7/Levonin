@@ -6,11 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <TrimmerRootAssembly Include="Newtonsoft.Json" />
+    <Folder Include="Resources\Scripts\Handlers\" />
   </ItemGroup>
 
   <ItemGroup>
-    <TrimmerRootAssembly Include="Newtonsoft.Json" />
-    <Folder Include="Resources\Scripts\Handlers\" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>

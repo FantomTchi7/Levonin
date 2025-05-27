@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Reflection;
 
 public delegate void ExportedFieldsAction(object target, PropertyInfo propertyInfo);
+
 public partial class Controller : Control
 {
 	[ExportGroup("Pages")]
@@ -33,7 +34,7 @@ public partial class Controller : Control
 	public List<PageDefinition> PageDefinitions { get; set; }
 
 	private Page? _currentPage = null;
-
+	public static Controller Instance { get; set; }
 	public Page? CurrentPage
 	{
 		get { return this._currentPage; }
@@ -48,8 +49,6 @@ public partial class Controller : Control
 	}
 	public override void _Ready()
 	{
-
-
 		CheckExportedFields(this, new ExportedFieldsAction[] { CheckExportedField, InitializeButtonEvent });
 		PageDefinitions = new List<PageDefinition>()
 		{
@@ -57,8 +56,14 @@ public partial class Controller : Control
 			new PageDefinition(Page.Messenger, MessengerPageContainer, MessengerPageButton),
 			new PageDefinition(Page.Profile, ProfilePageContainer, ProfilePageButton)
 		};
+		if(Instance != null && Instance != this)
+			{
+				QueueFree();
+				return;
+			}
+		Instance = this;
 	}
-	private void ChangePage(Page page)
+	public void ChangePage(Page page)
 	{
 		Func<Page, PageDefinition> pageDefinition = (containerPage) => PageDefinitions.Find(pageDefinition => pageDefinition.Page == containerPage);
 		if(_currentPage != null) pageDefinition(_currentPage.Value).Container.Visible = false;
@@ -82,7 +87,7 @@ public partial class Controller : Control
 			object value = propertyInfo.GetValue(targetObject);
 			if (value == null)
 			{
-				GetTree().Quit();
+				GD.Print("gg, wp");
 			}
 		}
 	}
