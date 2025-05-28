@@ -1,11 +1,13 @@
 using Godot;
 using Levonin.Scripts;
 using Levonin.Scripts.Handlers;
+using Levonin.Scripts.Models;
 using Levonin.Scripts.Models.API;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 
 
@@ -35,6 +37,8 @@ public partial class LoginHandler: Node
 			GD.Print("Login is success!");
 			EventHandler.Instance.CallEvent("loggedIn", true);
 			Controller.Instance.CurrentPageEnum = Levonin.Resources.Scripts.GUI.Page.Messenger;
+
+			
 		}
 		else
 		{

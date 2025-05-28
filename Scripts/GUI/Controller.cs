@@ -106,11 +106,15 @@ public partial class Controller : Control
 		Func<Page, PageDefinition> pageDefinition = (containerPage) => PageDefinitions.Find(pageDefinition => pageDefinition.Page == containerPage);
 		if(_currentPage != null) pageDefinition(_currentPage.Page).Container.Visible = false;
 		pageDefinition(page).Container.Visible = true;
+
+		EventHandler.Instance.CallEvent("changedPage", pageDefinition);
 	}
 	private void ChangePage(PageDefinition page)
 	{
 		if (_currentPage != null) _currentPage.Container.Visible = false;
 		page.Container.Visible = true;
+
+		EventHandler.Instance.CallEvent("changedPage", page);
 	}
 	private void ChangePage(string name)
 	{
@@ -129,6 +133,8 @@ public partial class Controller : Control
 		{
 			GD.PrintErr($"Page with name {name} not found!");
 		}
+
+		EventHandler.Instance.CallEvent("changedPage", pageDefinition);
 	}
 	private void CheckExportedFields(object targetObject, ExportedFieldsAction[] acts)
 	{

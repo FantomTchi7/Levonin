@@ -10,6 +10,8 @@ using System.Net.Http.Json;
 using System.ComponentModel;
 using System.Text.Json;
 using Newtonsoft.Json.Linq;
+using Levonin.Scripts.Models;
+using System.Net.Http.Headers;
 
 namespace Levonin.Scripts.Handlers
 {
@@ -36,6 +38,51 @@ namespace Levonin.Scripts.Handlers
 				if (param is bool logged) if (!logged) TokenChanged("");
 			});
 			
+		}
+		public async Task<ApiMessage> GetChannels()
+		{
+			ApiMessage apiMessage = new ApiMessage() { Success = false };
+			try
+			{
+				GD.Print("OUUUUUUUUUUU GADAMMMMMMMMNDFGSFGDSF");
+				Uri channelsUrl = new Uri(API_URL, "/api/users/channels");
+				HttpResponseMessage response = await _apiClient.GetAsync(channelsUrl);
+				JObject obj = JObject.Parse(await response.Content.ReadAsStringAsync());
+				if (response.IsSuccessStatusCode)
+				{
+					GD.Print("success ???");
+					if (obj["channels"] != null)
+					{
+						GD.Print("channels not null ???");
+						List<Channel> channels = obj["channels"].ToObject<List<Channel>>();
+						GD.Print("godamnn ???");
+						if(channels != null)
+						{
+							apiMessage.Success = true;
+							apiMessage.Response = channels;
+							GD.Print("here we are ???");
+						}
+					}
+					else if (obj["error"] != null)
+					{
+						GD.Print("error ???");
+						apiMessage.ErrorMessage = obj["error"].ToString();
+					}
+				}
+				else
+				{
+					GD.Print("error!@!!");
+					GD.Print(await response.Content.ReadAsStringAsync());
+				}
+
+			}
+			catch (Exception e)
+			{
+				GD.Print(e.ToString());
+				apiMessage.Success = false;
+				apiMessage.ErrorMessage = "Server issue.";
+			}
+			return apiMessage;
 		}
 		public async Task<ApiMessage> SignUp(string username, string password, string email)
 		{
@@ -93,7 +140,7 @@ namespace Levonin.Scripts.Handlers
 					if (obj["token"] != null)
 					{
 						GD.Print("token is not null");
-						TokenChanged(obj["token"]);
+						_apiClient.DefaultRequestHeaders.Authorization =  new AuthenticationHeaderValue("Bearer", obj["token"].ToString());
 						return new ApiMessage { Success = true };
 					}
 					else if (obj["error"] != null)

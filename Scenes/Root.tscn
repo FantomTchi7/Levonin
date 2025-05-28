@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dpcowrx2l3y5n"]
+[gd_scene load_steps=12 format=3 uid="uid://dpcowrx2l3y5n"]
 
 [ext_resource type="Script" uid="uid://717uxynbrke2" path="res://Scripts/GUI/Controller.cs" id="1_pl8e4"]
 [ext_resource type="Theme" uid="uid://crwx1fjw63c6d" path="res://Themes/Default.tres" id="1_tkdr5"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://d2171r7qdqxo3" path="res://Scenes/Pages/Messenger.tscn" id="5_oss8w"]
 [ext_resource type="FontFile" uid="uid://dx407ykec15ux" path="res://Fonts/MaterialSymbolsRounded/MaterialSymbolsRounded-VariableFont_FILL,GRAD,opsz,wght.ttf" id="9_0tf6y"]
 [ext_resource type="PackedScene" uid="uid://c41ev03so3ehh" path="res://Scenes/Pages/Chat/Messages.tscn" id="9_i4aq4"]
+[ext_resource type="PackedScene" uid="uid://cjd2wpxoq5e4y" path="res://Scenes/Buttons/ProfileButton.tscn" id="9_p04n7"]
 
 [node name="Root" type="Control" node_paths=PackedStringArray("MainPageButton", "MainPageContainer", "MessengerPageButton", "MessengerPageContainer", "ProfilePageButton", "ProfilePageContainer")]
 layout_mode = 3
@@ -57,6 +58,7 @@ layout_mode = 2
 [node name="Login" parent="MainContainer/PagesContainer" instance=ExtResource("3_knkkn")]
 visible = false
 layout_mode = 2
+theme = null
 
 [node name="SignUp" parent="MainContainer/PagesContainer" instance=ExtResource("4_sxhdm")]
 visible = false
@@ -69,6 +71,7 @@ layout_mode = 2
 [node name="Messenger" parent="MainContainer/PagesContainer" instance=ExtResource("5_oss8w")]
 visible = false
 layout_mode = 2
+LoginButtonTemplate = ExtResource("9_p04n7")
 
 [node name="Messages" parent="MainContainer/PagesContainer" instance=ExtResource("9_i4aq4")]
 visible = false

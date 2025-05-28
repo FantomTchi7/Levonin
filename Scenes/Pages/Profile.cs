@@ -31,7 +31,7 @@ public partial class Profile : PanelContainer
 	{
 		NameLabel.Text = UnAuthorizedName;
 		Control login = ButtonTemplate.Instantiate<Control>();
-		var loginButton = login.GetNode<Button>("Button");
+		var loginButton = login.GetNode<Button>("MarginContainer/Button");
 		loginButton.Text = "Login";
 		loginButton.Pressed += () =>
 		{
@@ -40,7 +40,7 @@ public partial class Profile : PanelContainer
 		};
 
 		Control signup = ButtonTemplate.Instantiate<Control>();
-		var signupButton =signup.GetNode<Button>("Button");
+		var signupButton =signup.GetNode<Button>("MarginContainer/Button");
 		signupButton.Text = "Sign Up";
 		signupButton.Pressed += () =>
 		{
@@ -50,9 +50,10 @@ public partial class Profile : PanelContainer
 		var container = GetNode("VBoxContainer");
 
 		AddictsButtons.AddRange([login, signup]);
+		
 		AddictsButtons.ForEach(control =>
 		{
-			GD.Print(control.GetNode<Button>("Button").Text);
+			GD.Print(control.GetNode<Button>("MarginContainer/Button").Text);
 			container.AddChild(control);
 			container.MoveChild(control, ButtonsStartPosition - 1);
 		});
@@ -61,9 +62,9 @@ public partial class Profile : PanelContainer
 
 	private void GenerateAuthorizedButtons()
 	{
-		NameLabel.Text = Session.Instance.Name;
+		NameLabel.Text = Session.Instance.Username;
 		Control logout = ButtonTemplate.Instantiate<Control>();
-		var logoutButton = logout.GetNode<Button>("Button");
+		var logoutButton = logout.GetNode<Button>("MarginContainer/Button");
 		logoutButton.Text = "Logout";
 		logoutButton.Pressed += () =>
 		{
