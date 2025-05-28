@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3oednby6yrlm"]
+[gd_scene load_steps=4 format=3 uid="uid://dr863uljt4vvq"]
 
 [ext_resource type="Theme" uid="uid://crwx1fjw63c6d" path="res://Themes/Default.tres" id="1_tos3a"]
 [ext_resource type="FontFile" uid="uid://dx407ykec15ux" path="res://Fonts/MaterialSymbolsRounded/MaterialSymbolsRounded-VariableFont_FILL,GRAD,opsz,wght.ttf" id="2_s1ie0"]
@@ -15,12 +15,12 @@ corner_detail = 20
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -39.0
-offset_right = 39.0
+offset_left = -99.5
+offset_right = 99.5
 offset_bottom = 40.0
 grow_horizontal = 2
 size_flags_horizontal = 4
-size_flags_vertical = 0
+size_flags_vertical = 4
 theme = ExtResource("1_tos3a")
 theme_override_styles/panel = SubResource("StyleBoxFlat_yd0hj")
 
@@ -52,9 +52,7 @@ theme_override_constants/margin_bottom = 5
 
 [node name="Label" type="Label" parent="HBoxContainer/TextContainer"]
 layout_mode = 2
-text = "Done, whatevergdfgdfg"
-visible_characters = 0
-visible_ratio = 0.0
+text = "Done, whatever"
 
 [node name="ExitContainer" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2
