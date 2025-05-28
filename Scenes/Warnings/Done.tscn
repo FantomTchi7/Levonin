@@ -1,0 +1,72 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3oednby6yrlm"]
+
+[ext_resource type="Theme" uid="uid://crwx1fjw63c6d" path="res://Themes/Default.tres" id="1_tos3a"]
+[ext_resource type="FontFile" uid="uid://dx407ykec15ux" path="res://Fonts/MaterialSymbolsRounded/MaterialSymbolsRounded-VariableFont_FILL,GRAD,opsz,wght.ttf" id="2_s1ie0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yd0hj"]
+bg_color = Color(0, 1, 0, 0.501961)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 20
+
+[node name="Control" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_tos3a")
+theme_override_styles/panel = SubResource("StyleBoxFlat_yd0hj")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="WarningContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="HBoxContainer/WarningContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_s1ie0")
+theme_override_font_sizes/font_size = 24
+text = "Done"
+
+[node name="TextContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="HBoxContainer/TextContainer"]
+layout_mode = 2
+text = "Done, whatever"
+visible_characters = -2
+visible_ratio = -0.142857
+
+[node name="ExitContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Button" type="Button" parent="HBoxContainer/ExitContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_s1ie0")
+theme_override_font_sizes/font_size = 24
+text = "Close"
