@@ -31,7 +31,7 @@ public partial class EventHandler: Node
 		Events[eventName].Add(action);
 	}
 
-	public void CallEvent(string eventName, object param)
+	public async void CallEvent(string eventName, object param)
 	{
 		if (Events.ContainsKey(eventName)) Events[eventName].ForEach(action => { 
 			action(param);

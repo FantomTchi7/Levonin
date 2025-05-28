@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ccgmefe7usou7"]
+[gd_scene load_steps=12 format=3 uid="uid://ccgmefe7usou7"]
 
 [ext_resource type="Texture2D" uid="uid://c8lh42dcwh28r" path="res://Icons/App/IconAndroidMain.png" id="1_irxi3"]
 [ext_resource type="Theme" uid="uid://crwx1fjw63c6d" path="res://Themes/Default.tres" id="1_tr77g"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://crtfyox80fojh" path="res://Models/Maxwell/Maxwell.fbx" id="2_hjayj"]
 [ext_resource type="Script" uid="uid://8pm040ivs20p" path="res://Scripts/Maxwell.cs" id="3_h7yon"]
 [ext_resource type="StyleBox" uid="uid://b655bp1fvoybf" path="res://Styles/stylebox_ProfileAvatarBorder.tres" id="5_36pgd"]
+[ext_resource type="PackedScene" uid="uid://cjd2wpxoq5e4y" path="res://Scenes/Buttons/ProfileButton.tscn" id="7_3k5ib"]
 
 [sub_resource type="Environment" id="Environment_irxi3"]
 ambient_light_source = 2
@@ -24,6 +25,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_tr77g")
 script = ExtResource("2_36pgd")
+ButtonTemplate = ExtResource("7_3k5ib")
+ButtonsStartPosition = 2
+UnAuthorizedName = "Not logged in"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -90,18 +94,7 @@ theme_override_styles/panel = ExtResource("5_36pgd")
 [node name="NameLabel" type="Label" parent="VBoxContainer/ProfileContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Not logged in"
 horizontal_alignment = 1
-
-[node name="LoginButton" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-text = "Login"
-
-[node name="SignInButton" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-text = "Sign in"
 
 [node name="MaxwellSpin" type="SubViewportContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -114,7 +107,7 @@ transparent_bg = true
 handle_input_locally = false
 msaa_3d = 3
 screen_space_aa = 1
-size = Vector2i(2, 2)
+size = Vector2i(393, 303)
 size_2d_override = Vector2i(128, 128)
 size_2d_override_stretch = true
 render_target_update_mode = 4

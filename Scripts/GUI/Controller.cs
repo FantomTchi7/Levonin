@@ -5,6 +5,7 @@ using Levonin.Resources.Scripts.Models;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading.Tasks;
 
 public delegate void ExportedFieldsAction(object target, PropertyInfo propertyInfo);
 

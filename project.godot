@@ -21,10 +21,12 @@ config/windows_native_icon="res://Icons/App/IconWindows.ico"
 
 [autoload]
 
+Session="*res://Scripts/Session.cs"
 EventHandler="*res://Scripts/Handlers/EventHandler.cs"
 GameManager="*res://Scripts/GameManager.cs"
 ApiHandler="*res://Scripts/Handlers/ApiHandler.cs"
 LoginHandler="*res://Scripts/Handlers/LoginHandler.cs"
+NotificationHandler="*res://Scripts/Handlers/NotificationHandler.cs"
 
 [display]
 

@@ -30,6 +30,11 @@ namespace Levonin.Scripts.Handlers
 				return;
 			}
 			Instance = this;
+
+			EventHandler.Instance.AddListener("loggedIn", param =>
+			{
+				if (param is bool logged) if (!logged) TokenChanged("");
+			});
 			
 		}
 		public async Task<ApiMessage> SignUp(string username, string password, string email)
@@ -123,8 +128,16 @@ namespace Levonin.Scripts.Handlers
 				};
 
 				HttpResponseMessage response = await client.GetAsync(API_URL);
-				if (response.IsSuccessStatusCode) EventHandler.Instance.CallEvent("InternetConnectivityChanged", true);
-				else EventHandler.Instance.CallEvent("InternetConnectivityChanged", false);
+				if (response.IsSuccessStatusCode)
+				{
+					EventHandler.Instance.CallEvent("internetActivityChanged", true);
+					EventHandler.Instance.CallEvent("successNotification", "Подключение успешно!");
+				}
+				else
+				{
+					EventHandler.Instance.CallEvent("internetActivityChanged", false);
+					EventHandler.Instance.CallEvent("successNotification", "Нет подключения к интернету (или ошибка сети).");
+				}
 			}
 			catch
 			{

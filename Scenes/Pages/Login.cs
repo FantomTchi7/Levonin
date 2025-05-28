@@ -26,8 +26,7 @@ public partial class Login : PanelContainer
 		GD.Print(_passwordInput.Text);
 		if(!string.IsNullOrEmpty(_usernameInput.Text) && !string.IsNullOrEmpty(_passwordInput.Text))
 		{
-			//await LoginHandler.Instance.Login(_usernameInput.Text, _passwordInput.Text);
-			Controller.Instance.CurrentPageEnum = Levonin.Resources.Scripts.GUI.Page.Messenger;
+			await LoginHandler.Instance.Login(_usernameInput.Text, _passwordInput.Text);
 		}
 	}
 }

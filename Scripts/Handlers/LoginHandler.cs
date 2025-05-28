@@ -26,17 +26,20 @@ public partial class LoginHandler: Node
 	{
 		GD.Print("login stared");
 		ApiMessage message = await ApiHandler.Instance.Authorize(name, password);
+		GD.Print($"UNLUUUCK {message.Success}");
 		if (message.Success)
 		{
 			Session.Instance.Username = name;
-			EventHandler.Instance.CallEvent("loggedIn", true);
+			Session.Instance.LoggedIn = true;
+			EventHandler.Instance.CallEvent("successNotification", "Succesfly logged in!");
 			GD.Print("Login is success!");
+			EventHandler.Instance.CallEvent("loggedIn", true);
 			Controller.Instance.CurrentPageEnum = Levonin.Resources.Scripts.GUI.Page.Messenger;
 		}
 		else
 		{
 			GD.Print(message.ErrorMessage);
-			EventHandler.Instance.CallEvent("loggedIn", false);
+			if(!NotificationHandler.Instance.isQueueClearing) EventHandler.Instance.CallEvent("failureNotification", "Invalid datas.");
 		}
 		return message;
 	}
@@ -52,5 +55,12 @@ public partial class LoginHandler: Node
 			GD.Print(message.ErrorMessage);
 		}
 		return message;
+	}
+
+	public void Logout()
+	{
+		EventHandler.Instance.CallEvent("loggedIn", false);
+		Session.Instance.Username = null;
+		Session.Instance.LoggedIn = false;
 	}
 }
