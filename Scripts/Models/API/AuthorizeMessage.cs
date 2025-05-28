@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Levonin.Scripts.Models.API
 {
-    public class ApiMessage
+	public class ApiMessage
 	{
 		public bool Success { get; set; }
 		public object? Response { get; set; }

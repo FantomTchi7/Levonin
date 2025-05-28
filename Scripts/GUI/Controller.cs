@@ -27,47 +27,107 @@ public partial class Controller : Control
 	[Export]
 	public Container ProfilePageContainer { get; set; }
 
-	[ExportGroup("Pages containers test")]
+	[ExportGroup("PagesContainersTest")]
 	[Export]
-	public Godot.Collections.Dictionary<Page, Godot.Collections.Dictionary<ControlType, Control>> gg { get; set; }
+	public Godot.Collections.Dictionary<string, NodePath> MultipleNodePaths { get; set; }
 
 	public List<PageDefinition> PageDefinitions { get; set; }
 
-	private Page? _currentPage = null;
+	private PageDefinition? _currentPage = null;
 	public static Controller Instance { get; set; }
-	public Page? CurrentPage
+	public PageDefinition? CurrentPage
 	{
 		get { return this._currentPage; }
 		set
 		{
 			if (this._currentPage != value)
 			{
-				if (value.HasValue) ChangePage(value.Value);
+				if (value != null) ChangePage(value);
 				this._currentPage = value;
+			}
+		}
+	}
+	public Page? CurrentPageEnum
+	{
+		get { return this._currentPage.Page; }
+		set
+		{
+			if (this._currentPage.Page != value)
+			{
+				if (value != null) ChangePage(value.Value);
+				this._currentPage = PageDefinitions.Find(defin => defin.Page == value);
+			}
+		}
+	}
+	public string? CurrentPageName
+	{
+		get
+		{
+			return this._currentPage?.Name;
+		}
+		set
+		{
+			if (this._currentPage.Name != value)
+			{
+				GD.Print("gg wp wwp");
+				if (value != null) ChangePage(value);
+				this._currentPage = PageDefinitions.Find(defin => defin.Name == value);
 			}
 		}
 	}
 	public override void _Ready()
 	{
-		CheckExportedFields(this, new ExportedFieldsAction[] { CheckExportedField, InitializeButtonEvent });
-		PageDefinitions = new List<PageDefinition>()
-		{
-			new PageDefinition(Page.Home, MainPageContainer, MainPageButton),
-			new PageDefinition(Page.Messenger, MessengerPageContainer, MessengerPageButton),
-			new PageDefinition(Page.Profile, ProfilePageContainer, ProfilePageButton)
-		};
-		if(Instance != null && Instance != this)
+
+		if (Instance != null && Instance != this)
 			{
 				QueueFree();
 				return;
 			}
 		Instance = this;
+		CheckExportedFields(this, new ExportedFieldsAction[] { CheckExportedField, InitializeButtonEvent });
+		PageDefinitions = new List<PageDefinition>()
+		{
+			new PageDefinition(Page.Home, MainPageContainer, MainPageButton, "home"),
+			new PageDefinition(Page.Messenger, MessengerPageContainer, MessengerPageButton, "messenger"),
+			new PageDefinition(Page.Profile, ProfilePageContainer, ProfilePageButton, "profile")
+		};
+		int index = -1;
+		foreach (var (name, containerPath) in MultipleNodePaths)
+		{
+			index++;
+			PageDefinitions.Add(new PageDefinition(Page.Foreign, GetNode<Container>(containerPath), null, name));
+
+		}
 	}
-	public void ChangePage(Page page)
+	private void ChangePage(Page page)
 	{
+		GD.Print("godamnn");
 		Func<Page, PageDefinition> pageDefinition = (containerPage) => PageDefinitions.Find(pageDefinition => pageDefinition.Page == containerPage);
-		if(_currentPage != null) pageDefinition(_currentPage.Value).Container.Visible = false;
+		if(_currentPage != null) pageDefinition(_currentPage.Page).Container.Visible = false;
 		pageDefinition(page).Container.Visible = true;
+	}
+	private void ChangePage(PageDefinition page)
+	{
+		if (_currentPage != null) _currentPage.Container.Visible = false;
+		page.Container.Visible = true;
+	}
+	private void ChangePage(string name)
+	{
+		PageDefinition? pageDefinition = PageDefinitions.Find(pageDefinition => {
+			GD.Print($"{pageDefinition.Name} == (STR) {name} ");
+		
+			return pageDefinition.Name == name;
+			});
+		if (pageDefinition != null)
+		{
+			if (_currentPage != null) _currentPage.Container.Visible = false;
+			GD.Print($"container is null {pageDefinition.Container == null}");
+			pageDefinition.Container.Visible = true;
+		}
+		else
+		{
+			GD.PrintErr($"Page with name {name} not found!");
+		}
 	}
 	private void CheckExportedFields(object targetObject, ExportedFieldsAction[] acts)
 	{
@@ -106,6 +166,6 @@ public partial class Controller : Control
 	private void Button_Pressed(Button button)
 	{
 		PageDefinition pageDefinition = PageDefinitions.Find(pageDefinition => pageDefinition.Button == button);
-		CurrentPage = pageDefinition.Page;
+		CurrentPage = pageDefinition;
 	}
 }

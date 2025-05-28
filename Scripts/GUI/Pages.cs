@@ -8,6 +8,6 @@ namespace Levonin.Resources.Scripts.GUI
 {
 	public enum Page
 	{
-		Home, Messenger, Profile
+		Home, Messenger, Profile, Foreign
 	}
 }

@@ -16,11 +16,14 @@ namespace Levonin.Resources.Scripts.Models
 		public Container Container { get; set; }
 		[Export]
 		public Button Button { get; set; }
-		public PageDefinition(Page page, Container container, Button button)
+		[Export]
+		public string Name { get; set; }
+		public PageDefinition(Page page, Container container, Button button, string name)
 		{
 			Page = page;
 			Container = container;
 			Button = button;
+			Name = name;
 		}
 	}
 }

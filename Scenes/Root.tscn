@@ -26,11 +26,11 @@ MessengerPageButton = NodePath("MainContainer/NavbarContainer/ButtonsContainer/B
 MessengerPageContainer = NodePath("MainContainer/PagesContainer/Messenger")
 ProfilePageButton = NodePath("MainContainer/NavbarContainer/ButtonsContainer/ButtonProfile")
 ProfilePageContainer = NodePath("MainContainer/PagesContainer/Profile")
-gg = {
-0: NodePath("MainContainer/PagesContainer/Games"),
-1: NodePath("MainContainer/PagesContainer/Messenger"),
-2: NodePath("MainContainer/PagesContainer/Profile")
-}
+MultipleNodePaths = Dictionary[String, NodePath]({
+"login": NodePath("MainContainer/PagesContainer/Login"),
+"pm": NodePath("MainContainer/PagesContainer/Messages"),
+"signup": NodePath("MainContainer/PagesContainer/SignUp")
+})
 
 [node name="MainContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -55,6 +55,7 @@ visible = false
 layout_mode = 2
 
 [node name="Login" parent="MainContainer/PagesContainer" instance=ExtResource("3_knkkn")]
+visible = false
 layout_mode = 2
 
 [node name="SignUp" parent="MainContainer/PagesContainer" instance=ExtResource("4_sxhdm")]
@@ -70,6 +71,7 @@ visible = false
 layout_mode = 2
 
 [node name="Messages" parent="MainContainer/PagesContainer" instance=ExtResource("9_i4aq4")]
+visible = false
 layout_mode = 2
 
 [node name="NavbarContainer" type="PanelContainer" parent="MainContainer"]
