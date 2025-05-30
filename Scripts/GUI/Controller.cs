@@ -99,18 +99,29 @@ public partial class Controller : Control
 			PageDefinitions.Add(new PageDefinition(Page.Foreign, GetNode<Container>(containerPath), null, name));
 
 		}
+
+		EventHandler.Instance.AddListener("changedPage", (param) =>
+		{
+			if(param is PageDefinition pageDef)
+			{
+				GD.Print($"Page changed -> {pageDef.Name}");
+			}
+		});
 	}
 	private void ChangePage(Page page)
 	{
-		GD.Print("godamnn");
+		GD.Print("Page changing...");
+		if(CurrentPage != null) GD.Print($"Previous page -> {CurrentPage.Name}");
 		Func<Page, PageDefinition> pageDefinition = (containerPage) => PageDefinitions.Find(pageDefinition => pageDefinition.Page == containerPage);
-		if(_currentPage != null) pageDefinition(_currentPage.Page).Container.Visible = false;
+		if(CurrentPage != null) _currentPage.Container.Visible = false;
 		pageDefinition(page).Container.Visible = true;
 
 		EventHandler.Instance.CallEvent("changedPage", pageDefinition);
 	}
 	private void ChangePage(PageDefinition page)
 	{
+		GD.Print("Page changing...");
+		if (CurrentPage != null) GD.Print($"Previous page -> {CurrentPage.Name}");
 		if (_currentPage != null) _currentPage.Container.Visible = false;
 		page.Container.Visible = true;
 
@@ -118,6 +129,8 @@ public partial class Controller : Control
 	}
 	private void ChangePage(string name)
 	{
+		GD.Print("Page changing...");
+		if (CurrentPage != null) GD.Print($"Previous page -> {CurrentPage.Name}");
 		PageDefinition? pageDefinition = PageDefinitions.Find(pageDefinition => {
 			GD.Print($"{pageDefinition.Name} == (STR) {name} ");
 		

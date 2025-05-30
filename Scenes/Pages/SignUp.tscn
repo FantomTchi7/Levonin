@@ -1,14 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwh4iq0mfhmru"]
+[gd_scene load_steps=3 format=3 uid="uid://cwh4iq0mfhmru"]
 
 [ext_resource type="Theme" uid="uid://crwx1fjw63c6d" path="res://Themes/Default.tres" id="1_la17j"]
+[ext_resource type="Script" uid="uid://bayp0jbur60pj" path="res://Scenes/Pages/SignUp.cs" id="2_whdhq"]
 
-[node name="SignUp" type="PanelContainer"]
+[node name="SignUp" type="PanelContainer" node_paths=PackedStringArray("SubmitButton", "UsernameInput", "PasswordInput")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_la17j")
+script = ExtResource("2_whdhq")
+SubmitButton = NodePath("VBoxContainer/Button")
+UsernameInput = NodePath("VBoxContainer/VBoxContainer/LineEdit")
+PasswordInput = NodePath("VBoxContainer/VBoxContainer2/LineEdit")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2

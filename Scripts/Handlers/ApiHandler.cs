@@ -89,7 +89,7 @@ namespace Levonin.Scripts.Handlers
 			try
 			{
 				Uri signUpUrl = new Uri(API_URL, "api/users/add");
-				string json = JsonSerializer.Serialize(new SignUp(username, password, email));
+				string json = JsonSerializer.Serialize(new Models.API.SignUp(username, password, email));
 				HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
 				HttpResponseMessage response = await _apiClient.PostAsync(signUpUrl, content);
@@ -98,23 +98,27 @@ namespace Levonin.Scripts.Handlers
 				if (response.IsSuccessStatusCode)
 				{
 					JObject obj = JObject.Parse(text);
-					if (obj["repsonse"] != null && obj["response"]["success"] != null)
+					if (obj["response"]["success"].Value<bool?>().HasValue)
 					{
 						bool success = obj["response"]["success"].Value<bool>();
 						if (success)
 						{
-							return new ApiMessage { Success = true};
+							GD.Print("SUCCESS [API HANDLER - SIGNUP ]");
+							return new ApiMessage { Success = true };
 						}
 						else
 						{
+							GD.Print("FAIL [API HANDLER - SIGNUP]");
 							if(obj["response"]["error"] != null)
 							return new ApiMessage { Success = false, ErrorMessage = obj["response"]["error"].Value<string>() };
 						}
 					}
+					GD.Print("RESPONSE OR SUCCESS KEY IS NULL [API HANDLER SIGNUP]");
 				}
 			}
 			catch(Exception e)
 			{
+				GD.Print("Exception has been catched");
 				GD.Print(e.ToString());
 			}
 			return new ApiMessage { Success = false };

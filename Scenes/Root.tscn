@@ -54,6 +54,9 @@ layout_mode = 2
 [node name="Profile" parent="MainContainer/PagesContainer" instance=ExtResource("2_kqog5")]
 visible = false
 layout_mode = 2
+ButtonTemplate = ExtResource("9_p04n7")
+ButtonsStartPosition = 2
+UnAuthorizedName = "Not logged in"
 
 [node name="Login" parent="MainContainer/PagesContainer" instance=ExtResource("3_knkkn")]
 visible = false
