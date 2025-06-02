@@ -77,7 +77,6 @@ layout_mode = 2
 LoginButtonTemplate = ExtResource("9_p04n7")
 
 [node name="Messages" parent="MainContainer/PagesContainer" instance=ExtResource("9_i4aq4")]
-visible = false
 layout_mode = 2
 
 [node name="NavbarContainer" type="PanelContainer" parent="MainContainer"]

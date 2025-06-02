@@ -1,0 +1,120 @@
+[gd_scene load_steps=19 format=3 uid="uid://dsmtotc3fkpm7"]
+
+[ext_resource type="Script" uid="uid://bthuirs603lm2" path="res://Scenes/Pages/Chat/Send.cs" id="1_mr4xt"]
+[ext_resource type="Texture2D" uid="uid://cqwf488ilbidi" path="res://Styles/LevoninGradient.tres" id="2_ngek0"]
+[ext_resource type="FontFile" uid="uid://dx407ykec15ux" path="res://Fonts/MaterialSymbolsRounded/MaterialSymbolsRounded-VariableFont_FILL,GRAD,opsz,wght.ttf" id="3_2w3nt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8h8qd"]
+bg_color = Color(0.25098, 0.25098, 0.25098, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_frkpi"]
+bg_color = Color(0.25098, 0.25098, 0.25098, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kj8oj"]
+bg_color = Color(0.501961, 0.501961, 0.501961, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4884a"]
+bg_color = Color(1, 0.8, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ld0x"]
+bg_color = Color(0.376471, 0.376471, 0.376471, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_du4u3"]
+bg_color = Color(0.501961, 0.501961, 0.501961, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v53ag"]
+bg_color = Color(0.25098, 0.25098, 0.25098, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 20
+
+[sub_resource type="Gradient" id="Gradient_8mbnx"]
+colors = PackedColorArray(0.8, 0.4, 0.2, 0.25098, 1, 0.8, 0, 0.25098)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dc5u4"]
+gradient = SubResource("Gradient_8mbnx")
+
+[sub_resource type="Gradient" id="Gradient_1rkmq"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.501961, 0.501961, 0.501961, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xnbuv"]
+gradient = SubResource("Gradient_1rkmq")
+
+[sub_resource type="Gradient" id="Gradient_1hq6t"]
+colors = PackedColorArray(0.8, 0.4, 0.2, 0.501961, 1, 0.8, 0, 0.501961)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_inb8l"]
+gradient = SubResource("Gradient_1hq6t")
+
+[sub_resource type="Gradient" id="Gradient_wc4ow"]
+colors = PackedColorArray(0.8, 0.4, 0.2, 1, 1, 0.8, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8sxnc"]
+gradient = SubResource("Gradient_wc4ow")
+
+[node name="ButtonContainer" type="PanelContainer"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_8h8qd")
+script = ExtResource("1_mr4xt")
+styleBoxFocus = SubResource("StyleBoxFlat_frkpi")
+styleBoxDisabled = SubResource("StyleBoxFlat_kj8oj")
+styleBoxHoverPressed = SubResource("StyleBoxFlat_4884a")
+styleBoxHover = SubResource("StyleBoxFlat_2ld0x")
+styleBoxPressed = SubResource("StyleBoxFlat_du4u3")
+styleBoxNormal = SubResource("StyleBoxFlat_v53ag")
+textureFocus = ExtResource("2_ngek0")
+textureDisabled = SubResource("GradientTexture1D_dc5u4")
+textureHoverPressed = SubResource("GradientTexture1D_xnbuv")
+textureHover = ExtResource("2_ngek0")
+texturePressed = SubResource("GradientTexture1D_inb8l")
+textureNormal = ExtResource("2_ngek0")
+
+[node name="Button" type="Button" parent="."]
+clip_children = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_2w3nt")
+theme_override_font_sizes/font_size = 48
+text = "Send"
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_8sxnc")
+expand_mode = 1

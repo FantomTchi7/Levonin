@@ -3,11 +3,11 @@
 [ext_resource type="Texture2D" uid="uid://c8lh42dcwh28r" path="res://Icons/App/IconAndroidMain.png" id="1_irxi3"]
 [ext_resource type="Theme" uid="uid://crwx1fjw63c6d" path="res://Themes/Default.tres" id="1_tr77g"]
 [ext_resource type="Script" uid="uid://bll44y8axjd68" path="res://Scenes/Pages/Profile.cs" id="2_36pgd"]
-[ext_resource type="StyleBox" uid="uid://cjr0fk26dffmg" path="res://Styles/stylebox_ProfileRoundAvatar.tres" id="2_71e8n"]
+[ext_resource type="StyleBox" uid="uid://cjr0fk26dffmg" path="res://Styles/Avatar/stylebox_ProfileRound.tres" id="2_71e8n"]
 [ext_resource type="FontFile" uid="uid://dx407ykec15ux" path="res://Fonts/MaterialSymbolsRounded/MaterialSymbolsRounded-VariableFont_FILL,GRAD,opsz,wght.ttf" id="2_ey25m"]
 [ext_resource type="PackedScene" uid="uid://crtfyox80fojh" path="res://Models/Maxwell/Maxwell.fbx" id="2_hjayj"]
 [ext_resource type="Script" uid="uid://8pm040ivs20p" path="res://Scripts/Maxwell.cs" id="3_h7yon"]
-[ext_resource type="StyleBox" uid="uid://b655bp1fvoybf" path="res://Styles/stylebox_ProfileAvatarBorder.tres" id="5_36pgd"]
+[ext_resource type="StyleBox" uid="uid://b655bp1fvoybf" path="res://Styles/Avatar/stylebox_ProfileBorder.tres" id="5_36pgd"]
 
 [sub_resource type="Environment" id="Environment_irxi3"]
 ambient_light_source = 2

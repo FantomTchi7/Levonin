@@ -1,0 +1,102 @@
+[gd_scene load_steps=6 format=3 uid="uid://ddkkie47uslri"]
+
+[ext_resource type="StyleBox" uid="uid://dhohtxacmfltt" path="res://Styles/Avatar/stylebox_ChatRound.tres" id="1_ylckc"]
+[ext_resource type="FontFile" uid="uid://dx407ykec15ux" path="res://Fonts/MaterialSymbolsRounded/MaterialSymbolsRounded-VariableFont_FILL,GRAD,opsz,wght.ttf" id="2_poi56"]
+[ext_resource type="Texture2D" uid="uid://c8lh42dcwh28r" path="res://Icons/App/IconAndroidMain.png" id="3_j7g5b"]
+[ext_resource type="StyleBox" uid="uid://c7syyrens7e16" path="res://Styles/Avatar/stylebox_ChatBorder.tres" id="4_2m6qq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rkcs3"]
+bg_color = Color(0.25098, 0.25098, 0.25098, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 20
+
+[node name="MessageContainer" type="HBoxContainer"]
+
+[node name="AvatarContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="AvatarContainer"]
+layout_mode = 2
+
+[node name="UserImagePanel" type="PanelContainer" parent="AvatarContainer/AspectRatioContainer"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("1_ylckc")
+
+[node name="RoundAvatar" type="Panel" parent="AvatarContainer/AspectRatioContainer/UserImagePanel"]
+clip_children = 1
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_ylckc")
+
+[node name="DefaultAvatar" type="Label" parent="AvatarContainer/AspectRatioContainer/UserImagePanel/RoundAvatar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.25098, 0.25098, 0.25098, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_poi56")
+theme_override_font_sizes/font_size = 64
+text = "Person"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UserAvatar" type="TextureRect" parent="AvatarContainer/AspectRatioContainer/UserImagePanel/RoundAvatar"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("3_j7g5b")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Border" type="Panel" parent="AvatarContainer/AspectRatioContainer/UserImagePanel/RoundAvatar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("4_2m6qq")
+
+[node name="TextContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="TextContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rkcs3")
+
+[node name="MarginContainer" type="MarginContainer" parent="TextContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="TextContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+text = "Text"

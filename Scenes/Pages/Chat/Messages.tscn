@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://c41ev03so3ehh"]
+[gd_scene load_steps=9 format=3 uid="uid://c41ev03so3ehh"]
 
-[ext_resource type="FontFile" uid="uid://dx407ykec15ux" path="res://Fonts/MaterialSymbolsRounded/MaterialSymbolsRounded-VariableFont_FILL,GRAD,opsz,wght.ttf" id="1_l1pf7"]
 [ext_resource type="Theme" uid="uid://crwx1fjw63c6d" path="res://Themes/Default.tres" id="1_sh5rm"]
 [ext_resource type="PackedScene" uid="uid://bj0r3b7we8c7x" path="res://Scenes/Pages/Chat/PMTemplate.tscn" id="1_yfqks"]
+[ext_resource type="Script" uid="uid://g70j6egvj55n" path="res://Scripts/Handlers/MessengerKeyboardHandler.cs" id="2_1hq6t"]
+[ext_resource type="PackedScene" uid="uid://ddkkie47uslri" path="res://Scenes/Pages/Chat/MessageLeft.tscn" id="3_8mbnx"]
+[ext_resource type="PackedScene" uid="uid://dl2m8ji5iyf06" path="res://Scenes/Pages/Chat/MessageRight.tscn" id="4_1hq6t"]
+[ext_resource type="PackedScene" uid="uid://dsmtotc3fkpm7" path="res://Scenes/Buttons/GradientButton.tscn" id="7_62jpn"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pwgph"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sh5rm"]
 bg_color = Color(0.25098, 0.25098, 0.25098, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
@@ -12,21 +15,9 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 corner_detail = 20
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sh5rm"]
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-corner_detail = 20
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1hq6t"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8mbnx"]
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-corner_detail = 20
-
-[node name="Messages" type="PanelContainer"]
+[node name="Messenger" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -38,69 +29,99 @@ theme = ExtResource("1_sh5rm")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
+script = ExtResource("2_1hq6t")
+_keyboardSpacerNodePath = NodePath("HSeparator")
 
-[node name="PmTemplate" parent="VBoxContainer" instance=ExtResource("1_yfqks")]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="VBoxContainer"]
+[node name="PmTemplate" parent="VBoxContainer/PanelContainer" instance=ExtResource("1_yfqks")]
+layout_mode = 2
+
+[node name="MessagesContainer" type="ScrollContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 2.0
+horizontal_scroll_mode = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.4
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 25
-
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_pwgph")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/PanelContainer"]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MessagesContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 5.0
+size_flags_vertical = 10
+size_flags_stretch_ratio = 2.0
+alignment = 2
+
+[node name="MessageContainer" parent="VBoxContainer/MessagesContainer/VBoxContainer" instance=ExtResource("3_8mbnx")]
+layout_mode = 2
+
+[node name="MessageContainer2" parent="VBoxContainer/MessagesContainer/VBoxContainer" instance=ExtResource("4_1hq6t")]
+layout_mode = 2
+
+[node name="MessageContainer3" parent="VBoxContainer/MessagesContainer/VBoxContainer" instance=ExtResource("4_1hq6t")]
+layout_mode = 2
+
+[node name="MessageContainer4" parent="VBoxContainer/MessagesContainer/VBoxContainer" instance=ExtResource("3_8mbnx")]
+layout_mode = 2
+
+[node name="TextBoxContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TextBoxContainer"]
+layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer"]
-clip_children = 1
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TextBoxContainer/MarginContainer"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_sh5rm")
 
-[node name="TextEdit" type="TextEdit" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer/PanelContainer"]
+[node name="TextContainer" type="MarginContainer" parent="VBoxContainer/TextBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/TextBoxContainer/MarginContainer/HBoxContainer/TextContainer"]
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/selection_color = Color(0.501961, 0.501961, 0.501961, 1)
-wrap_mode = 1
-scroll_fit_content_height = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_sh5rm")
 
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TextBoxContainer/MarginContainer/HBoxContainer/TextContainer/PanelContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer2"]
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer/TextBoxContainer/MarginContainer/HBoxContainer/TextContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+theme_override_colors/background_color = Color(0.25098, 0.25098, 0.25098, 1)
+text = "Hello world!
+123
+Test"
+scroll_fit_content_height = true
+caret_blink = true
 
-[node name="Button" type="Button" parent="VBoxContainer/MarginContainer/PanelContainer/HBoxContainer/MarginContainer2/AspectRatioContainer"]
+[node name="SendButtonContainer" type="MarginContainer" parent="VBoxContainer/TextBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("1_l1pf7")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_8mbnx")
-text = "Send"
+size_flags_vertical = 8
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer/TextBoxContainer/MarginContainer/HBoxContainer/SendButtonContainer"]
+layout_mode = 2
+stretch_mode = 1
+alignment_vertical = 2
+
+[node name="SendButton" parent="VBoxContainer/TextBoxContainer/MarginContainer/HBoxContainer/SendButtonContainer/AspectRatioContainer" instance=ExtResource("7_62jpn")]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_1hq6t")
