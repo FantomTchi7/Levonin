@@ -72,6 +72,7 @@ public partial class WebSocketHandler: Node
 
     public async Task Send(string message)
     {
+        GD.Print($"Sending... {message} to server");
         var bytes = Encoding.UTF8.GetBytes(message);
         await _socket.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, true, CancellationToken.None);
     }

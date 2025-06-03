@@ -8,7 +8,7 @@ namespace Levonin.Scripts.Models.WS.Client
 {
     public class MessageInChannel: WSMessage
     {
-        public string header { get; set; }
+        public string header { get; set; } = "MessageInChannel";
         public int channel { get; set; }
     }
 }
