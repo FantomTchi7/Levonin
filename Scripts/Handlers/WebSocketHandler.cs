@@ -85,6 +85,6 @@ public partial class WebSocketHandler: Node
 			return;
 		}
 		Instance = this;
-        _ = ConnectAsync("ws://localhost:5000");
+        _ = ConnectAsync("wss://levonin-websocket.aleksandermilisenko23.thkit.ee");
     }
 }

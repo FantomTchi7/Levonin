@@ -18,7 +18,7 @@ namespace Levonin.Scripts.Handlers
 	public partial class ApiHandler: Node
 	{
 		public static ApiHandler Instance { get; private set; }
-		public readonly Uri API_URL = new Uri("http://localhost:3000");
+		public readonly Uri API_URL = new Uri("https://levonin.aleksandermilisenko23.thkit.ee/");
 		private readonly System.Net.Http.HttpClient _apiClient = new();
 		public override void _Ready()
 		{
