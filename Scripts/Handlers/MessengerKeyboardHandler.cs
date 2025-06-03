@@ -15,8 +15,12 @@ public partial class MessengerKeyboardHandler : Node
 	private float _currentAnimatedSeparatorHeightUiUnits;
 	private float _currentTargetSeparatorHeightUiUnits;
 
+	private bool _isMobilePlatform;
+
 	public override void _Ready()
 	{
+		_isMobilePlatform = OS.HasFeature("mobile");
+
 		if (ProjectSettings.HasSetting("display/window/size/viewport_height"))
 		{
 			_projectBaseUiHeight = (float)ProjectSettings.GetSetting("display/window/size/viewport_height");
@@ -85,15 +89,20 @@ public partial class MessengerKeyboardHandler : Node
 
 		float physicalToUiScaleFactorY = _projectBaseUiHeight / physicalScreenHeight;
 
-		// 1. Get keyboard height information from DisplaySafeArea (this one gets the full keyboard height early)
+		// 1. Get keyboard height information from DisplaySafeArea
 		Rect2I currentSafeAreaPx = DisplayServer.GetDisplaySafeArea();
 		float currentTotalBottomInsetPx = physicalScreenHeight - (currentSafeAreaPx.Position.Y + currentSafeAreaPx.Size.Y);
 		float currentTotalBottomInsetUiUnits = currentTotalBottomInsetPx * physicalToUiScaleFactorY;
 		float purelyKeyboardHeightFromSafeAreaUiUnits = Mathf.Max(0f, currentTotalBottomInsetUiUnits - _baseSafeAreaBottomInsetUiUnits);
 
-		// 2. Get real-time virtual keyboard height (while this one updates the keyboard height as it appears)
-		float virtualKeyboardHeightPx = DisplayServer.VirtualKeyboardGetHeight();
-		float realtimeKeyboardHeightUiUnits = virtualKeyboardHeightPx * physicalToUiScaleFactorY;
+		// 2. Get real-time virtual keyboard height
+		float realtimeKeyboardHeightUiUnits = 0f;
+
+		if (_isMobilePlatform)
+		{
+			float virtualKeyboardHeightPx = DisplayServer.VirtualKeyboardGetHeight();
+			realtimeKeyboardHeightUiUnits = virtualKeyboardHeightPx * physicalToUiScaleFactorY;
+		}
 
 		// 3. Determine new target separator height
 		float newTargetHeightUiUnits;
