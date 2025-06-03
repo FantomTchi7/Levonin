@@ -91,6 +91,7 @@ public partial class MessagesController : PanelContainer
 			pmTemplate.GetNode<Label>("MarginContainer/HBoxContainer/InfoContainer/Status").Text = Session.Instance.CurrentChannel.Status;
 			foreach(var message in messages)
 			{
+				GD.Print(message.Content);
 				if(message.Username != Session.Instance.Username)
 				{
 					HBoxContainer messageNode = LeftToRight.Instantiate<HBoxContainer>();
