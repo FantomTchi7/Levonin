@@ -32,8 +32,15 @@ public partial class MessagesController : PanelContainer
 		SendMessageButton = GetNode<PanelContainer>("VBoxContainer/TextBoxContainer/MarginContainer/HBoxContainer/SendButtonContainer/AspectRatioContainer/SendButton").GetNode<Button>("Button");
 		MessageInput = GetNode<TextEdit>("VBoxContainer/TextBoxContainer/MarginContainer/HBoxContainer/TextContainer/PanelContainer/MarginContainer/TextEdit");
 		SendMessageButton.Pressed += SendMessageButton_Pressed;
+		EventHandler.Instance.AddListener("reRenderChannel", ReRender);
 				
 
+	}
+
+	private async void ReRender(object param)
+	{
+		ApiMessage messages = await ApiHandler.Instance.GetChannels();
+		Render(messages);
 	}
 
 	private async void SendMessageButton_Pressed()

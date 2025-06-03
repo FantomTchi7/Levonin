@@ -21,9 +21,9 @@ config/windows_native_icon="res://Icons/App/IconWindows.ico"
 
 [autoload]
 
-WebSocketHandler="*res://Scripts/Handlers/WebSocketHandler.cs"
 Session="*res://Scripts/Session.cs"
 EventHandler="*res://Scripts/Handlers/EventHandler.cs"
+WebSocketHandler="*res://Scripts/Handlers/WebSocketHandler.cs"
 GameManager="*res://Scripts/GameManager.cs"
 ApiHandler="*res://Scripts/Handlers/ApiHandler.cs"
 LoginHandler="*res://Scripts/Handlers/LoginHandler.cs"

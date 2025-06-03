@@ -49,6 +49,7 @@ public partial class WebSocketHandler: Node
                         case "ChannelReRender":
                             var channelMsg = JsonConvert.DeserializeObject<ChannelReRender>(msg);
                             GD.Print("Re-render channel: " + channelMsg.channel);
+                            EventHandler.Instance.CallEvent("reRenderChannel", null);
                             break;
 
                         case "MessageInChannelResponse":
