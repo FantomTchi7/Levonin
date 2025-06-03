@@ -84,6 +84,50 @@ namespace Levonin.Scripts.Handlers
 			}
 			return apiMessage;
 		}
+
+		public async Task<ApiMessage> GetMessages(int chatID)
+		{
+			ApiMessage apiMessage = new ApiMessage() { Success = false };
+			try
+			{
+				
+				Uri channelsUrl = new Uri(API_URL, $"/api/channels/{chatID}/messages");
+				HttpResponseMessage response = await _apiClient.GetAsync(channelsUrl);
+				string text = await response.Content.ReadAsStringAsync();
+				GD.Print(text);
+				JObject obj = JObject.Parse(text);
+				if (response.IsSuccessStatusCode)
+				{
+					if (obj["messages"] != null)
+					{
+						List<Message> messages = obj["messages"].ToObject<List<Message>>();
+						if(messages != null)
+						{
+							apiMessage.Success = true;
+							apiMessage.Response = messages;
+						}
+					}
+					else if (obj["error"] != null)
+					{
+						apiMessage.ErrorMessage = obj["error"].ToString();
+					}
+				}
+				else
+				{
+					GD.Print("error!@!!");
+					GD.Print(await response.Content.ReadAsStringAsync());
+				}
+
+			}
+			catch (Exception e)
+			{
+				GD.Print(e.ToString());
+				apiMessage.Success = false;
+				apiMessage.ErrorMessage = "Server issue.";
+			}
+			return apiMessage;
+		}
+
 		public async Task<ApiMessage> SignUp(string username, string password, string email)
 		{
 			try
@@ -123,6 +167,46 @@ namespace Levonin.Scripts.Handlers
 			}
 			return new ApiMessage { Success = false };
 		}
+
+		public async Task<ApiMessage> GetUserId(string username)
+		{
+			ApiMessage apiMessage = new ApiMessage();
+			try
+			{
+				Uri channelsUrl = new Uri(API_URL, $"/api/users/get-user-id/{username}");
+				HttpResponseMessage response = await _apiClient.GetAsync(channelsUrl);
+				string text = await response.Content.ReadAsStringAsync();
+				GD.Print(text);
+				JObject obj = JObject.Parse(text);
+				if (response.IsSuccessStatusCode)
+				{
+					if (obj["response"] != null)
+					{
+						int userId = obj["response"]["message"].ToObject<int>();
+						if(userId != null)
+						{
+							apiMessage.Success = true;
+							apiMessage.Response = userId;
+						}
+					}
+					else if (obj["error"] != null)
+					{
+						apiMessage.ErrorMessage = obj["error"].ToString();
+					}
+				}
+				else
+				{
+					GD.Print("error!@!!");
+					GD.Print(await response.Content.ReadAsStringAsync());
+				}
+			}
+			catch(Exception e)
+			{
+				GD.PrintErr(e);
+				return new ApiMessage { Success = false, ErrorMessage = e.Message};
+			}
+			return apiMessage;
+		}
 		
 		public async Task<ApiMessage> Authorize(string username, string password)
 		{
@@ -145,6 +229,7 @@ namespace Levonin.Scripts.Handlers
 					{
 						GD.Print("token is not null");
 						_apiClient.DefaultRequestHeaders.Authorization =  new AuthenticationHeaderValue("Bearer", obj["token"].ToString());
+						Session.Instance.Token = obj["token"].ToString();
 						return new ApiMessage { Success = true };
 					}
 					else if (obj["error"] != null)
@@ -160,6 +245,7 @@ namespace Levonin.Scripts.Handlers
 			}
 			return new ApiMessage { Success = false, ErrorMessage = "Error" };
 		}
+
 
 		private void TokenChanged(object param)
 		{
@@ -195,5 +281,41 @@ namespace Levonin.Scripts.Handlers
 				GD.Print("❌ Нет подключения к интернету (или ошибка сети).");
 			}
 		}
+		public async Task SendMessage(string textContent, int chatId)
+		{
+			try
+			{
+				Uri authorizeUrl = new Uri(API_URL, "api/channels/send-message");
+				string json = JsonSerializer.Serialize(new SendMessageApiModel { chatId = chatId, content = textContent });
+
+				HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+				HttpResponseMessage response = await _apiClient.PostAsync(authorizeUrl, content);
+				string text = await response.Content.ReadAsStringAsync();
+				GD.Print(text);
+				if (response.IsSuccessStatusCode)
+				{
+					JObject obj = JObject.Parse(text);
+					if (obj["success"] != null)
+					{
+						if ((bool)obj["success"] == true)
+						{
+						
+						}
+						
+					}
+					
+				}
+			}
+			catch(Exception e)
+			{
+				GD.Print(e.ToString());
+			}
+		}
+	}
+	public class SendMessageApiModel
+	{
+		public string content { get; set;}
+		public int chatId { get; set; }
 	}
 }

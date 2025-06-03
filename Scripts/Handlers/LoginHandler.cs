@@ -3,6 +3,8 @@ using Levonin.Scripts;
 using Levonin.Scripts.Handlers;
 using Levonin.Scripts.Models;
 using Levonin.Scripts.Models.API;
+using Levonin.Scripts.Models.WS.Client;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,8 +39,12 @@ public partial class LoginHandler: Node
 			GD.Print("Login is success!");
 			EventHandler.Instance.CallEvent("loggedIn", true);
 			Controller.Instance.CurrentPageEnum = Levonin.Resources.Scripts.GUI.Page.Messenger;
+			ApiMessage mess = await ApiHandler.Instance.GetUserId(name);
+			Session.Instance.UserID = (int) mess.Response;
 
-			
+			InitialConnection initialConnection = new InitialConnection { name = Session.Instance.Username, token = Session.Instance.Token, userId = Session.Instance.UserID };
+			string json = JsonConvert.SerializeObject(initialConnection, Formatting.Indented);
+			await WebSocketHandler.Instance.Send(json);
 		}
 		else
 		{

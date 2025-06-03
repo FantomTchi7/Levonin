@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://c41ev03so3ehh"]
+[gd_scene load_steps=13 format=3 uid="uid://c41ev03so3ehh"]
 
 [ext_resource type="Theme" uid="uid://crwx1fjw63c6d" path="res://Themes/Default.tres" id="1_sh5rm"]
 [ext_resource type="PackedScene" uid="uid://bj0r3b7we8c7x" path="res://Scenes/Pages/Chat/PMTemplate.tscn" id="1_yfqks"]
 [ext_resource type="Script" uid="uid://g70j6egvj55n" path="res://Scripts/Handlers/MessengerKeyboardHandler.cs" id="2_1hq6t"]
+[ext_resource type="Script" uid="uid://dasfwrsylvaoy" path="res://Scripts/Controllers/MessagesController.cs" id="2_1rkmq"]
 [ext_resource type="PackedScene" uid="uid://ddkkie47uslri" path="res://Scenes/Pages/Chat/MessageLeft.tscn" id="3_8mbnx"]
 [ext_resource type="PackedScene" uid="uid://dl2m8ji5iyf06" path="res://Scenes/Pages/Chat/MessageRight.tscn" id="4_1hq6t"]
 [ext_resource type="PackedScene" uid="uid://dsmtotc3fkpm7" path="res://Scenes/Buttons/GradientButton.tscn" id="7_62jpn"]
@@ -32,6 +33,9 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_sh5rm")
+script = ExtResource("2_1rkmq")
+LeftToRight = ExtResource("3_8mbnx")
+RightToLeft = ExtResource("4_1hq6t")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -41,6 +45,7 @@ script = ExtResource("2_1hq6t")
 layout_mode = 2
 
 [node name="PmTemplate" parent="VBoxContainer/PanelContainer" instance=ExtResource("1_yfqks")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="MessagesContainer" type="ScrollContainer" parent="VBoxContainer"]
@@ -54,18 +59,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 10
 size_flags_stretch_ratio = 2.0
 alignment = 2
-
-[node name="MessageContainer" parent="VBoxContainer/MessagesContainer/VBoxContainer" instance=ExtResource("3_8mbnx")]
-layout_mode = 2
-
-[node name="MessageContainer2" parent="VBoxContainer/MessagesContainer/VBoxContainer" instance=ExtResource("4_1hq6t")]
-layout_mode = 2
-
-[node name="MessageContainer3" parent="VBoxContainer/MessagesContainer/VBoxContainer" instance=ExtResource("4_1hq6t")]
-layout_mode = 2
-
-[node name="MessageContainer4" parent="VBoxContainer/MessagesContainer/VBoxContainer" instance=ExtResource("3_8mbnx")]
-layout_mode = 2
 
 [node name="TextBoxContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -126,6 +119,7 @@ alignment_vertical = 2
 
 [node name="SendButton" parent="VBoxContainer/TextBoxContainer/MarginContainer/HBoxContainer/SendButtonContainer/AspectRatioContainer" instance=ExtResource("7_62jpn")]
 layout_mode = 2
+mouse_filter = 1
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Levonin.Scripts.Models;
 using Levonin.Scripts.Handlers;
 using Levonin.Scripts.Models.API;
+using Levonin.Scripts;
 
 public partial class MessengerController : PanelContainer
 {
@@ -98,6 +99,17 @@ public partial class MessengerController : PanelContainer
 				Node componentInstance = PMTemplate.Instantiate();
 				ChannelModels.Add(new ChannelModel() { ChatID = channel.ChatID, ChatName = channel.ChatName, ChatType = chatType, ImageUrl = channel.ImageUrl, Node = componentInstance, Status = channel.Status, StatusType = status, UserID = channel.UserID  });
 				MarginContainer marginContainer = componentInstance.GetNode<MarginContainer>("MarginContainer");
+				marginContainer.GuiInput += async (InputEvent @event) =>
+				{
+					if (@event is InputEventMouseButton mouseEvent &&
+					mouseEvent.Pressed &&
+					mouseEvent.ButtonIndex == MouseButton.Left)
+					{
+						Session.Instance.CurrentChannel = channel;
+						EventHandler.Instance.CallEvent("messagesPageRender", await ApiHandler.Instance.GetMessages(channel.ChatID));
+						Controller.Instance.CurrentPageName = "pm";
+					}
+				};
 				HBoxContainer hboxContainer = marginContainer.GetNode<HBoxContainer>("HBoxContainer"); 
 				AspectRatioContainer aspectRatioContainer = hboxContainer.GetNode<AspectRatioContainer>("AspectRatioContainer"); 
 				MarginContainer infoContainer = hboxContainer.GetNode<MarginContainer>("InfoContainer"); 
