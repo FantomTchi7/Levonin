@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c41ev03so3ehh"]
+[gd_scene load_steps=12 format=3 uid="uid://c41ev03so3ehh"]
 
 [ext_resource type="Theme" uid="uid://crwx1fjw63c6d" path="res://Themes/Default.tres" id="1_sh5rm"]
 [ext_resource type="PackedScene" uid="uid://bj0r3b7we8c7x" path="res://Scenes/Pages/Chat/PMTemplate.tscn" id="1_yfqks"]
@@ -14,6 +14,12 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 corner_detail = 20
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1rkmq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jc40a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_12pta"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1hq6t"]
 
@@ -97,10 +103,11 @@ theme_override_constants/margin_bottom = 10
 
 [node name="TextEdit" type="TextEdit" parent="VBoxContainer/TextBoxContainer/MarginContainer/HBoxContainer/TextContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
-theme_override_colors/background_color = Color(0.25098, 0.25098, 0.25098, 1)
-text = "Hello world!
-123
-Test"
+theme_override_colors/background_color = Color(0, 0, 0, 0)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1rkmq")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jc40a")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_12pta")
+text = "Hello world!"
 scroll_fit_content_height = true
 caret_blink = true
 
