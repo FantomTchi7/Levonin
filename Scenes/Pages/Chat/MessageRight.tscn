@@ -14,36 +14,53 @@ corner_radius_bottom_left = 10
 corner_detail = 20
 
 [node name="MessageContainer" type="HBoxContainer"]
-alignment = 2
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 95.0
+grow_horizontal = 2
 
-[node name="TextContainer" type="MarginContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
-size_flags_vertical = 4
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_bottom = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="TextContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer"]
 layout_mode = 2
+size_flags_vertical = 1
+text = "User"
+
+[node name="TextContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/TextContainer"]
+layout_mode = 2
+size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_rkcs3")
 
-[node name="MarginContainer" type="MarginContainer" parent="TextContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TextContainer/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Label" type="Label" parent="TextContainer/PanelContainer/MarginContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/TextContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
-text = "Text"
+text = "Hello world!"
+fit_content = true
+vertical_alignment = 1
 
 [node name="AvatarContainer" type="MarginContainer" parent="."]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -51,6 +68,8 @@ theme_override_constants/margin_bottom = 10
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="AvatarContainer"]
 layout_mode = 2
+alignment_horizontal = 0
+alignment_vertical = 2
 
 [node name="UserImagePanel" type="PanelContainer" parent="AvatarContainer/AspectRatioContainer"]
 custom_minimum_size = Vector2(75, 75)
