@@ -14,11 +14,11 @@ corner_radius_bottom_left = 10
 corner_detail = 20
 
 [node name="MessageContainer" type="HBoxContainer"]
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
 [node name="AvatarContainer" type="MarginContainer" parent="."]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -26,6 +26,8 @@ theme_override_constants/margin_bottom = 10
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="AvatarContainer"]
 layout_mode = 2
+alignment_horizontal = 0
+alignment_vertical = 2
 
 [node name="UserImagePanel" type="PanelContainer" parent="AvatarContainer/AspectRatioContainer"]
 custom_minimum_size = Vector2(75, 75)
@@ -77,26 +79,40 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("4_2m6qq")
 
-[node name="TextContainer" type="MarginContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "User"
+
+[node name="TextContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
 
-[node name="PanelContainer" type="PanelContainer" parent="TextContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/TextContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rkcs3")
 
-[node name="MarginContainer" type="MarginContainer" parent="TextContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TextContainer/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Label" type="Label" parent="TextContainer/PanelContainer/MarginContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/TextContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
-text = "Text"
+text = "Hello world!dasdasdasdasdasdasdasdasdas"
+fit_content = true
+autowrap_mode = 2
