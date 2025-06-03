@@ -60,7 +60,8 @@ namespace Levonin.Scripts.Handlers
 						{
 							apiMessage.Success = true;
 							apiMessage.Response = channels;
-							GD.Print("here we are ???");
+
+							GD.Print("here we are ???" + " COUNT ---- " + channels.Count);
 						}
 					}
 					else if (obj["error"] != null)

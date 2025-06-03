@@ -39,7 +39,7 @@ public partial class MessagesController : PanelContainer
 
 	private async void ReRender(object param)
 	{
-		ApiMessage messages = await ApiHandler.Instance.GetChannels();
+		ApiMessage messages = await ApiHandler.Instance.GetMessages(Session.Instance.CurrentChannel.ChatID);
 		Render(messages);
 	}
 
@@ -89,6 +89,7 @@ public partial class MessagesController : PanelContainer
 			VBoxContainer pmTemplate = GetNode<VBoxContainer>("VBoxContainer/PanelContainer/PmTemplate");
 			pmTemplate.GetNode<Label>("MarginContainer/HBoxContainer/InfoContainer/Name").Text = Session.Instance.CurrentChannel.ChatName;
 			pmTemplate.GetNode<Label>("MarginContainer/HBoxContainer/InfoContainer/Status").Text = Session.Instance.CurrentChannel.Status;
+			GD.Print("countik kk --- " + messages.Count);
 			foreach(var message in messages)
 			{
 				GD.Print(message.Content);
