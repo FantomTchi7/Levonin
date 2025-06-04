@@ -44,8 +44,11 @@ public partial class MessengerController : PanelContainer
 				{ 
 					ToggleLoginButton();
 					ApiMessage mess = await ApiHandler.Instance.GetChannels();
-					if(mess.Response is List<Levonin.Scripts.Models.Channel> channels)
+					GD.Print("XUJJJJ");
+					GD.Print(mess.Response.GetType());
+					if (mess.Response is List<Levonin.Scripts.Models.Channel> channels)
 					{
+						GD.Print("XUJJJNEEE");
 						RenderComponents(channels);
 					}
 				}
@@ -99,9 +102,10 @@ public partial class MessengerController : PanelContainer
 	public void RenderComponents(List<Channel> channels)
 	{
 		ClearContainer();
-
+		GD.Print("ALOOOOOOOOOOOOOOOOOOOOOOOO");
 		foreach (Channel channel in channels)
 		{
+			GD.Print(channel.ChatName);
 			if (PMTemplate != null)
 			{
 				ChatType chatType = GetChatType(channel.ChatType).Value;
