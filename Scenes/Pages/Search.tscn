@@ -1,0 +1,114 @@
+[gd_scene load_steps=12 format=3 uid="uid://b83yvew61l871"]
+
+[ext_resource type="Theme" uid="uid://crwx1fjw63c6d" path="res://Themes/Default.tres" id="1_btk71"]
+[ext_resource type="Script" uid="uid://dasfwrsylvaoy" path="res://Scripts/Controllers/MessagesController.cs" id="2_bindw"]
+[ext_resource type="PackedScene" uid="uid://ddkkie47uslri" path="res://Scenes/Pages/Chat/MessageLeft.tscn" id="3_lp3yg"]
+[ext_resource type="PackedScene" uid="uid://dl2m8ji5iyf06" path="res://Scenes/Pages/Chat/MessageRight.tscn" id="4_ldrk5"]
+[ext_resource type="Script" uid="uid://g70j6egvj55n" path="res://Scripts/Handlers/MessengerKeyboardHandler.cs" id="5_rdlf8"]
+[ext_resource type="PackedScene" uid="uid://bj0r3b7we8c7x" path="res://Scenes/Pages/Chat/PMTemplate.tscn" id="6_dppaq"]
+[ext_resource type="FontFile" uid="uid://dx407ykec15ux" path="res://Fonts/MaterialSymbolsRounded/MaterialSymbolsRounded-VariableFont_FILL,GRAD,opsz,wght.ttf" id="7_bindw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sh5rm"]
+bg_color = Color(0.25098, 0.25098, 0.25098, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 20
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1rkmq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jc40a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_12pta"]
+
+[node name="Search" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_btk71")
+script = ExtResource("2_bindw")
+LeftToRight = ExtResource("3_lp3yg")
+RightToLeft = ExtResource("4_ldrk5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+script = ExtResource("5_rdlf8")
+_hSeparatorPath = NodePath("")
+_heightOffsetUiUnits = 82.5
+
+[node name="TextBoxContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TextBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TextBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="TextContainer" type="MarginContainer" parent="VBoxContainer/TextBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/TextBoxContainer/MarginContainer/HBoxContainer/TextContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_sh5rm")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TextBoxContainer/MarginContainer/HBoxContainer/TextContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer/TextBoxContainer/MarginContainer/HBoxContainer/TextContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_colors/background_color = Color(0, 0, 0, 0)
+theme_override_colors/font_placeholder_color = Color(0.501961, 0.501961, 0.501961, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1rkmq")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jc40a")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_12pta")
+placeholder_text = "Search..."
+scroll_fit_content_height = true
+caret_blink = true
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="PmTemplate" parent="VBoxContainer/PanelContainer/HBoxContainer" instance=ExtResource("6_dppaq")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer/PanelContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/MarginContainer/AspectRatioContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_bindw")
+theme_override_font_sizes/font_size = 48
+text = "group"
