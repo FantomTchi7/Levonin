@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b83yvew61l871"]
+[gd_scene load_steps=13 format=3 uid="uid://b83yvew61l871"]
 
 [ext_resource type="Theme" uid="uid://crwx1fjw63c6d" path="res://Themes/Default.tres" id="1_btk71"]
 [ext_resource type="Script" uid="uid://dasfwrsylvaoy" path="res://Scripts/Controllers/MessagesController.cs" id="2_bindw"]
@@ -6,9 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://dl2m8ji5iyf06" path="res://Scenes/Pages/Chat/MessageRight.tscn" id="4_ldrk5"]
 [ext_resource type="Script" uid="uid://g70j6egvj55n" path="res://Scripts/Handlers/MessengerKeyboardHandler.cs" id="5_rdlf8"]
 [ext_resource type="PackedScene" uid="uid://bj0r3b7we8c7x" path="res://Scenes/Pages/Chat/PMTemplate.tscn" id="6_dppaq"]
+[ext_resource type="PackedScene" uid="uid://dsmtotc3fkpm7" path="res://Scenes/Buttons/GradientButton.tscn" id="6_lp3yg"]
 [ext_resource type="FontFile" uid="uid://dx407ykec15ux" path="res://Fonts/MaterialSymbolsRounded/MaterialSymbolsRounded-VariableFont_FILL,GRAD,opsz,wght.ttf" id="7_bindw"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sh5rm"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ldrk5"]
 bg_color = Color(0.25098, 0.25098, 0.25098, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
@@ -16,11 +17,11 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 corner_detail = 20
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1rkmq"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rdlf8"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jc40a"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dppaq"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_12pta"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_60xwb"]
 
 [node name="Search" type="PanelContainer"]
 anchors_preset = 15
@@ -57,7 +58,6 @@ layout_mode = 2
 [node name="TextContainer" type="MarginContainer" parent="VBoxContainer/TextBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 8
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -66,7 +66,7 @@ theme_override_constants/margin_bottom = 10
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/TextBoxContainer/MarginContainer/HBoxContainer/TextContainer"]
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_sh5rm")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ldrk5")
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TextBoxContainer/MarginContainer/HBoxContainer/TextContainer/PanelContainer"]
 layout_mode = 2
@@ -79,12 +79,29 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 theme_override_colors/background_color = Color(0, 0, 0, 0)
 theme_override_colors/font_placeholder_color = Color(0.501961, 0.501961, 0.501961, 1)
-theme_override_styles/normal = SubResource("StyleBoxEmpty_1rkmq")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_jc40a")
-theme_override_styles/read_only = SubResource("StyleBoxEmpty_12pta")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rdlf8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dppaq")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_60xwb")
 placeholder_text = "Search..."
 scroll_fit_content_height = true
 caret_blink = true
+
+[node name="SendButtonContainer" type="MarginContainer" parent="VBoxContainer/TextBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer/TextBoxContainer/MarginContainer/HBoxContainer/SendButtonContainer"]
+layout_mode = 2
+stretch_mode = 1
+alignment_vertical = 2
+
+[node name="SendButton" parent="VBoxContainer/TextBoxContainer/MarginContainer/HBoxContainer/SendButtonContainer/AspectRatioContainer" instance=ExtResource("6_lp3yg")]
+layout_mode = 2
+mouse_filter = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
