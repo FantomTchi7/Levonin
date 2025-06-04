@@ -12,11 +12,11 @@ public delegate void ExportedFieldsAction(object target, PropertyInfo propertyIn
 public partial class Controller : Control
 {
 	[ExportGroup("Pages")]
-	[ExportSubgroup("Main")]
-	[Export]
-	public Button MainPageButton { get; set; }
-	[Export]
-	public Container MainPageContainer { get; set; }
+	// [ExportSubgroup("Main")]
+	// [Export]
+	// public Button MainPageButton { get; set; }
+	// [Export]
+	// public Container MainPageContainer { get; set; }
 	[ExportSubgroup("Messenger")]
 	[Export]
 	public Button MessengerPageButton { get; set; }
@@ -88,7 +88,7 @@ public partial class Controller : Control
 		CheckExportedFields(this, new ExportedFieldsAction[] { CheckExportedField, InitializeButtonEvent });
 		PageDefinitions = new List<PageDefinition>()
 		{
-			new PageDefinition(Page.Home, MainPageContainer, MainPageButton, "home"),
+			// new PageDefinition(Page.Home, MainPageContainer, MainPageButton, "home"),
 			new PageDefinition(Page.Messenger, MessengerPageContainer, MessengerPageButton, "messenger"),
 			new PageDefinition(Page.Profile, ProfilePageContainer, ProfilePageButton, "profile")
 		};

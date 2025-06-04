@@ -38,7 +38,7 @@ thickness = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_difym"]
 
-[node name="Root" type="Control" node_paths=PackedStringArray("MainPageButton", "MainPageContainer", "MessengerPageButton", "MessengerPageContainer", "ProfilePageButton", "ProfilePageContainer")]
+[node name="Root" type="Control" node_paths=PackedStringArray("MessengerPageButton", "MessengerPageContainer", "ProfilePageButton", "ProfilePageContainer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,8 +47,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_tkdr5")
 script = ExtResource("1_pl8e4")
-MainPageButton = NodePath("MainContainer/NavbarContainer/ButtonsContainer/ButtonHome")
-MainPageContainer = NodePath("MainContainer/PagesContainer/Games")
 MessengerPageButton = NodePath("MainContainer/NavbarContainer/ButtonsContainer/ButtonChat")
 MessengerPageContainer = NodePath("MainContainer/PagesContainer/Messenger")
 ProfilePageButton = NodePath("MainContainer/NavbarContainer/ButtonsContainer/ButtonProfile")
@@ -109,28 +107,10 @@ layout_mode = 2
 [node name="NavbarContainer" type="PanelContainer" parent="MainContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 0.75
 
 [node name="ButtonsContainer" type="HBoxContainer" parent="MainContainer/NavbarContainer"]
 layout_mode = 2
-
-[node name="ButtonHome" type="Button" parent="MainContainer/NavbarContainer/ButtonsContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("9_0tf6y")
-theme_override_font_sizes/font_size = 28
-theme_override_styles/focus = SubResource("StyleBoxEmpty_i4aq4")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_p04n7")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_y1djv")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_t0qco")
-theme_override_styles/hover_pressed = SubResource("StyleBoxLine_75oan")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_fauc5")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_yiytj")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_626no")
-theme_override_styles/pressed = SubResource("StyleBoxLine_i4aq4")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_6ebx2")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_difym")
-toggle_mode = true
-text = "Home"
 
 [node name="ButtonChat" type="Button" parent="MainContainer/NavbarContainer/ButtonsContainer"]
 layout_mode = 2
@@ -148,7 +128,6 @@ theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_626no")
 theme_override_styles/pressed = SubResource("StyleBoxLine_i4aq4")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_6ebx2")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_difym")
-toggle_mode = true
 text = "Chat"
 
 [node name="ButtonProfile" type="Button" parent="MainContainer/NavbarContainer/ButtonsContainer"]
@@ -167,5 +146,4 @@ theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_626no")
 theme_override_styles/pressed = SubResource("StyleBoxLine_i4aq4")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_6ebx2")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_difym")
-toggle_mode = true
 text = "Person"

@@ -7,6 +7,8 @@ public partial class MessengerKeyboardHandler : Node
 
 	[Export(PropertyHint.Range, "1.0, 30.0")] private float _animationSpeed = 15.0f;
 
+	[Export] private float _heightOffsetUiUnits = 0.0f; // New export variable for height subtraction
+
 	private float _baseSeparatorHeightUiUnits;
 	private float _baseSafeAreaBottomInsetUiUnits;
 
@@ -66,8 +68,11 @@ public partial class MessengerKeyboardHandler : Node
 		float initialBottomInsetPx = physicalScreenHeight - (initialSafeAreaPx.Position.Y + initialSafeAreaPx.Size.Y);
 		_baseSafeAreaBottomInsetUiUnits = initialBottomInsetPx * physicalToUiScaleFactorY;
 
-		_currentAnimatedSeparatorHeightUiUnits = _baseSeparatorHeightUiUnits;
-		_currentTargetSeparatorHeightUiUnits = _baseSeparatorHeightUiUnits;
+		// Calculate initial target height considering the offset
+		// This is the height when the keyboard is not visible, adjusted by the offset.
+		float initialTargetHeightWithOffset = Mathf.Max(0.0f, _baseSeparatorHeightUiUnits - _heightOffsetUiUnits);
+		_currentAnimatedSeparatorHeightUiUnits = initialTargetHeightWithOffset;
+		_currentTargetSeparatorHeightUiUnits = initialTargetHeightWithOffset;
 
 		_hSeparatorNode.CustomMinimumSize = new Vector2(_hSeparatorNode.CustomMinimumSize.X, _currentAnimatedSeparatorHeightUiUnits);
 	}
@@ -77,7 +82,7 @@ public partial class MessengerKeyboardHandler : Node
 		if (_hSeparatorNode == null || !_hSeparatorNode.IsInsideTree())
 		{
 			GD.PushWarning("HSeparator node is null or not in tree. Disabling MessengerKeyboardHandler process.");
-			SetProcess(false); 
+			SetProcess(false);
 			return;
 		}
 
@@ -104,18 +109,21 @@ public partial class MessengerKeyboardHandler : Node
 			realtimeKeyboardHeightUiUnits = virtualKeyboardHeightPx * physicalToUiScaleFactorY;
 		}
 
-		// 3. Determine new target separator height
-		float newTargetHeightUiUnits;
-		if (realtimeKeyboardHeightUiUnits > 0.1f) 
+		// 3. Determine new target separator height (before applying offset)
+		float newTargetHeightBeforeOffsetUiUnits;
+		if (realtimeKeyboardHeightUiUnits > 0.1f)
 		{
-			newTargetHeightUiUnits = _baseSeparatorHeightUiUnits + purelyKeyboardHeightFromSafeAreaUiUnits;
+			// Keyboard is considered open
+			newTargetHeightBeforeOffsetUiUnits = _baseSeparatorHeightUiUnits + purelyKeyboardHeightFromSafeAreaUiUnits;
 		}
 		else
 		{
-			newTargetHeightUiUnits = _baseSeparatorHeightUiUnits;
+			// Keyboard is considered closed
+			newTargetHeightBeforeOffsetUiUnits = _baseSeparatorHeightUiUnits;
 		}
 		
-		_currentTargetSeparatorHeightUiUnits = newTargetHeightUiUnits;
+		// Apply the configured offset and ensure height is not negative
+		_currentTargetSeparatorHeightUiUnits = Mathf.Max(0.0f, newTargetHeightBeforeOffsetUiUnits - _heightOffsetUiUnits);
 
 		// 4. Animate current height towards the target height
 		if (!Mathf.IsEqualApprox(_currentAnimatedSeparatorHeightUiUnits, _currentTargetSeparatorHeightUiUnits))
@@ -127,6 +135,7 @@ public partial class MessengerKeyboardHandler : Node
 				interpolationFactor
 			);
 
+			// Snap to target if very close to prevent micro-animations
 			if (Mathf.Abs(_currentAnimatedSeparatorHeightUiUnits - _currentTargetSeparatorHeightUiUnits) < 0.01f)
 			{
 				_currentAnimatedSeparatorHeightUiUnits = _currentTargetSeparatorHeightUiUnits;
