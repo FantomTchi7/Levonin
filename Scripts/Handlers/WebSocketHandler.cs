@@ -56,7 +56,9 @@ public partial class WebSocketHandler: Node
                             var msgResp = JsonConvert.DeserializeObject<MessageInChannelResponse>(msg);
                             GD.Print("Message sent ok: " + msgResp.success);
                             break;
-
+                        case "ReRenderChannels":
+                            EventHandler.Instance.CallEvent("reRenderChannels", null);
+                            break;
                         default:
                             GD.Print("Unknown header: " + header);
                             break;

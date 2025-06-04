@@ -57,6 +57,8 @@ public partial class MessengerController : PanelContainer
 					
 		});
 
+		EventHandler.Instance.AddListener("reRenderChannels", ReRender);
+
 		foreach(Node child in GetChildren())
 		{
 			if (child is VBoxContainer container)
@@ -82,6 +84,15 @@ public partial class MessengerController : PanelContainer
 		foreach (var node in PMContainer.GetChildren())
 		{
 			if (node is Node) node.QueueFree();
+		}
+	}
+
+	public async void ReRender(object param)
+	{
+		ApiMessage mess = await ApiHandler.Instance.GetChannels();
+		if (mess.Response is List<Levonin.Scripts.Models.Channel> channels)
+		{
+			RenderComponents(channels);
 		}
 	}
 

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ccgmefe7usou7" path="res://Scenes/Pages/Profile.tscn" id="2_kqog5"]
 [ext_resource type="PackedScene" uid="uid://c7heox6rjhypa" path="res://Scenes/Pages/Login.tscn" id="3_knkkn"]
 [ext_resource type="PackedScene" uid="uid://b2g01j784esvw" path="res://Scenes/Pages/Games.tscn" id="4_oss8w"]
-[ext_resource type="PackedScene" uid="uid://b83yvew61l871" path="res://Scenes/Pages/Search.tscn" id="4_p04n7"]
+[ext_resource type="PackedScene" uid="uid://c4lic6o88aflk" path="res://Scenes/Pages/Search.tscn" id="4_p04n7"]
 [ext_resource type="PackedScene" uid="uid://cwh4iq0mfhmru" path="res://Scenes/Pages/SignUp.tscn" id="4_sxhdm"]
 [ext_resource type="PackedScene" uid="uid://d2171r7qdqxo3" path="res://Scenes/Pages/Messenger.tscn" id="5_oss8w"]
 [ext_resource type="FontFile" uid="uid://dx407ykec15ux" path="res://Fonts/MaterialSymbolsRounded/MaterialSymbolsRounded-VariableFont_FILL,GRAD,opsz,wght.ttf" id="9_0tf6y"]

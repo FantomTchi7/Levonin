@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://njy6ntgjqogv"]
+
+[ext_resource type="PackedScene" uid="uid://bj0r3b7we8c7x" path="res://Scenes/Pages/Chat/PMTemplate.tscn" id="1_qrilc"]
+[ext_resource type="FontFile" uid="uid://dx407ykec15ux" path="res://Fonts/MaterialSymbolsRounded/MaterialSymbolsRounded-VariableFont_FILL,GRAD,opsz,wght.ttf" id="2_q80qg"]
+
+[node name="PanelContainer" type="PanelContainer"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PmTemplate" parent="HBoxContainer" instance=ExtResource("1_qrilc")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="HBoxContainer/MarginContainer/AspectRatioContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_q80qg")
+theme_override_font_sizes/font_size = 48
+text = "group"

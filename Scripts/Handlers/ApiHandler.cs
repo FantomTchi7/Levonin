@@ -313,10 +313,91 @@ namespace Levonin.Scripts.Handlers
 				GD.Print(e.ToString());
 			}
 		}
+		public async Task<ApiMessage> GetUsers(string name)
+		{
+			ApiMessage apiMessage = new ApiMessage();
+			try
+			{
+				Uri channelsUrl = new Uri(API_URL, $"/api/users/{name}");
+				HttpResponseMessage response = await _apiClient.GetAsync(channelsUrl);
+				string text = await response.Content.ReadAsStringAsync();
+				GD.Print(text);
+				JObject obj = JObject.Parse(text);
+				if (response.IsSuccessStatusCode)
+				{
+					if (obj["response"] != null)
+					{
+						List<ApiUser> userId = obj["response"]["users"].ToObject<List<ApiUser>>();
+						if (userId != null)
+						{
+							apiMessage.Success = true;
+							apiMessage.Response = userId;
+						}
+					}
+					else if (obj["error"] != null)
+					{
+						apiMessage.ErrorMessage = obj["error"].ToString();
+					}
+				}
+				else
+				{
+					GD.Print("error!@!!");
+					GD.Print(await response.Content.ReadAsStringAsync());
+				}
+			}
+			catch (Exception e)
+			{
+				GD.PrintErr(e);
+				return new ApiMessage { Success = false, ErrorMessage = e.Message };
+			}
+			return apiMessage;
+		}
+		public async Task CreateChannel(int userID)
+		{
+			try
+			{
+				Uri authorizeUrl = new Uri(API_URL, "api/channels/add");
+				string json = JsonSerializer.Serialize(new CreateChannelApiModel { userId = userID });
+
+				HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+				HttpResponseMessage response = await _apiClient.PostAsync(authorizeUrl, content);
+				string text = await response.Content.ReadAsStringAsync();
+				GD.Print(text);
+				if (response.IsSuccessStatusCode)
+				{
+					JObject obj = JObject.Parse(text);
+					if (obj["success"] != null)
+					{
+						if ((bool)obj["success"] == true)
+						{
+
+						}
+
+					}
+
+				}
+			}
+			catch (Exception e)
+			{
+				GD.Print(e.ToString());
+			}
+		}
 	}
 	public class SendMessageApiModel
 	{
 		public string content { get; set;}
 		public int chatId { get; set; }
+	}
+	public class CreateChannelApiModel
+	{
+		public int userId { get; set; }
+	}
+	public class ApiUser
+	{
+		public int UserID { get; set; }
+		public string Username { get; set; }
+		public int? UserStatusID { get; set; }
+		public int relevance { get; set; }
 	}
 }
